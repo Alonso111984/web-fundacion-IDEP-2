@@ -244,6 +244,10 @@ section.marino .sub-titulo{color:#bed0e4}
   transition:transform .7s ease}
 .pieza figure:hover img{transform:scale(1.04)}
 .pieza figcaption{text-align:center}
+/* En escritorio, el texto de los 6 objetivos se lee ~16-17% más grande. */
+@media (min-width:1024px){
+  .objetivo p{font-size:1.2rem}
+}
 
 /* ---------- Visión y misión ----------
    Las dos secciones forman "Visión & misión". Texto centrado y los dos
@@ -252,16 +256,19 @@ section.marino .sub-titulo{color:#bed0e4}
 .mision-fondo{position:absolute; inset:0; width:100%; height:100%;
   object-fit:cover; opacity:.20}
 .mision .wrap{position:relative; z-index:2; text-align:center}
+/* La Visión lleva su propio fondo sólido para separarla de Objetivos
+   estratégicos (blanco) y de Misión (marino con mural de fondo). */
+.vision{background:var(--azul)}
 .vision .wrap{text-align:center}
 .titulo-vm{font-family:var(--serif); text-transform:uppercase;
   font-size:clamp(1.35rem,3.6vw,2.2rem); letter-spacing:clamp(.1em,.7vw,.2em);
   margin:0 0 22px; font-weight:400; line-height:1.25}
 .mision .titulo-vm{color:var(--azul-claro)}
-.vision .titulo-vm{color:var(--azul)}
+.vision .titulo-vm{color:var(--blanco)}
 .texto-vm{margin:0 auto; max-width:62ch; font-size:clamp(1.05rem,1.7vw,1.32rem);
   line-height:1.62}
 .mision .texto-vm{color:#dce7f3}
-.vision .texto-vm{color:var(--tinta-suave)}
+.vision .texto-vm{color:#dce7f3}
 
 /* ---------- Proyectos ---------- */
 .proyectos{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(22px,3vw,34px)}
@@ -304,11 +311,16 @@ section.marino .sub-titulo{color:#bed0e4}
    misma caja para que se vean del mismo tamaño. */
 .figura-capitulo{margin-top:clamp(26px,3vw,38px)}
 .figura-capitulo .caja{height:clamp(180px,20vw,250px); display:flex;
-  align-items:center; justify-content:center}
+  align-items:center; justify-content:center; overflow:hidden}
 .figura-capitulo .caja img{max-height:100%; max-width:100%; width:auto;
   object-fit:contain; filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
   transition:transform .7s ease}
 .figura-capitulo:hover .caja img{transform:scale(1.04)}
+/* La foto de la Colección DALMAU trae mucho margen vacío en el propio
+   archivo, así que se ve más chica que la del Spondylus aunque la caja
+   mida igual; se acerca un poco para igualar el tamaño aparente. */
+.figura-capitulo .caja img[src*="pieza-figura-nueva"]{transform:scale(1.3)}
+.figura-capitulo:hover .caja img[src*="pieza-figura-nueva"]{transform:scale(1.35)}
 .figura-capitulo figcaption{text-align:center}
 
 /* ---------- Líneas de fomento ---------- */
@@ -559,16 +571,17 @@ form textarea{min-height:140px; resize:vertical}
   .pieza img{max-width:240px}
   .objetivo p{text-align:left}
 }
-/* En celular, las dos piezas de la Colección DALMAU bajan juntas
-   después del objetivo 6, en vez de quedar intercaladas. */
+/* En celular, cada pieza de la Colección DALMAU baja justo después
+   del bloque de texto al que pertenece (la 1.ª tras el objetivo 3,
+   la 2.ª tras el objetivo 6), en vez de quedar juntas al final. */
 @media (max-width:767.98px){
   .objetivos-zona{display:flex; flex-direction:column; gap:clamp(26px,5vw,42px)}
   .objetivos-zona .bloque{display:contents}
   .objetivos-zona .bloque .objetivos-txt{order:1}
-  .objetivos-zona .bloque:nth-of-type(2) .objetivos-txt{order:2}
   /* Esta regla tiene que ganarle a .bloque.invertido .pieza{order:0} */
-  .objetivos-zona .bloque .pieza,
-  .objetivos-zona .bloque.invertido .pieza{order:3}
+  .objetivos-zona .bloque:nth-of-type(1) .pieza{order:2}
+  .objetivos-zona .bloque:nth-of-type(2) .objetivos-txt{order:3}
+  .objetivos-zona .bloque:nth-of-type(2) .pieza{order:4}
 }
 /* Botones centrados en celular */
 @media (max-width:767.98px){
