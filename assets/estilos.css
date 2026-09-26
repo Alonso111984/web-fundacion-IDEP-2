@@ -290,7 +290,11 @@ section.marino .sub-titulo{color:#bed0e4}
   gap:clamp(28px,4vw,56px); margin-top:clamp(34px,4vw,56px)}
 .sitios h3{margin-bottom:18px; padding-bottom:14px;
   border-bottom:1px solid rgba(255,255,255,.22)}
-.sitios ol{margin:0; padding-left:22px; color:#c9d8e8}
+.sitios ol{margin:0 0 clamp(26px,3vw,38px); padding-left:22px; color:#c9d8e8}
+/* Cada columna es una columna flex de alto igual (por el grid de arriba);
+   así la pieza de cada capítulo queda pegada abajo y las dos fotos quedan
+   alineadas a la misma altura, aunque las listas tengan largos distintos. */
+.sitios .rv{display:flex; flex-direction:column}
 .sitios li{margin-bottom:14px; line-height:1.55}
 .sitios li b{color:#fff; font-weight:400}
 .sitios li span{display:block; font-family:var(--sans); font-size:.79rem;
@@ -307,21 +311,20 @@ section.marino .sub-titulo{color:#bed0e4}
   transition:transform .7s ease}
 .sitios-figuras figure:hover img{transform:scale(1.04)}
 .sitios-figuras figcaption{margin-top:auto; padding-top:12px; text-align:center}
-/* Cada pieza va al final del texto de su propio capítulo, las dos con la
-   misma caja para que se vean del mismo tamaño. */
-.figura-capitulo{margin-top:clamp(26px,3vw,38px)}
-.figura-capitulo .caja{height:clamp(180px,20vw,250px); display:flex;
-  align-items:center; justify-content:center; overflow:hidden}
-.figura-capitulo .caja img{max-height:100%; max-width:100%; width:auto;
-  object-fit:contain; filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
+/* Cada pieza va al final del texto de su propio capítulo, pegada al fondo
+   de su columna (ver .sitios .rv arriba) para quedar a la misma altura que
+   la del otro capítulo. Ancho fijo e igual para las dos, alto libre (las
+   dos fotos son casi cuadradas) para que nunca se recorten. */
+.figura-capitulo{margin-top:auto}
+.figura-capitulo .caja{width:clamp(150px,42%,260px); max-width:100%; margin:0 auto}
+.figura-capitulo .caja img{width:100%; height:auto; display:block;
+  filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
   transition:transform .7s ease}
 .figura-capitulo:hover .caja img{transform:scale(1.04)}
-/* La foto de la Colección DALMAU trae mucho margen vacío en el propio
-   archivo, así que se ve más chica que la del Spondylus aunque la caja
-   mida igual; se acerca un poco para igualar el tamaño aparente. */
-.figura-capitulo .caja img[src*="pieza-figura-nueva"]{transform:scale(1.3)}
-.figura-capitulo:hover .caja img[src*="pieza-figura-nueva"]{transform:scale(1.35)}
-.figura-capitulo figcaption{text-align:center}
+/* Reserva el alto de hasta 2 líneas de pie de foto: como los dos pies
+   tienen distinto largo, sin esto la foto con el pie más corto queda más
+   abajo que la otra y se pierde la alineación. */
+.figura-capitulo figcaption{text-align:center; min-height:3em}
 
 /* ---------- Líneas de fomento ---------- */
 .fomento-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,60px)}
