@@ -188,10 +188,13 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
 /* Las siglas IDEP se resaltan con tipografía, sin caja ni fondo: blanco
    puro, algo más espaciadas y una línea fina de color debajo, separada
    del texto. */
+/* IDEP domina el título: 25% más grande y en azul claro luminoso
+   en vez de blanco, con la misma línea decorativa debajo. */
 .portada h1 strong{
-  font-weight:400; color:#fff; letter-spacing:.08em;
+  font-weight:400; color:#4a8bc4; font-size:1.25em; letter-spacing:.08em;
   text-decoration-line:underline; text-decoration-color:#4a8bc4;
   text-decoration-thickness:3px; text-underline-offset:6px;
+  transition:color .35s ease;
 }
 .portada .sub{max-width:56ch; margin-top:20px; font-size:clamp(1.02rem,1.6vw,1.28rem);
   color:#dce7f3; font-style:italic; line-height:1.6}
@@ -243,7 +246,9 @@ section.marino .sub-titulo{color:#bed0e4}
 /* ---------- Quiénes somos ---------- */
 .dos-col{display:grid; grid-template-columns:1.15fr .85fr;
   gap:clamp(30px,5vw,66px); align-items:center}
-.dos-col img{border-radius:2px}
+.dos-col figure{overflow:hidden; border-radius:2px}
+.dos-col img{border-radius:2px; transition:transform .3s ease}
+.dos-col figure:hover img{transform:scale(1.03)}
 
 /* ---------- CORRECCIÓN 12 · Valores ----------
    Fondo con foto del mural y capa marino al 82% para que el blanco del
@@ -317,16 +322,25 @@ section.marino .sub-titulo{color:#bed0e4}
   background-size:cover; background-position:center;
 }
 .vm-grid{display:block}
-.vm-col{color:#fff; text-align:center}
+/* Cada texto va en su propia tarjeta blanca (92% de opacidad) sobre la
+   foto del mural, para que el texto quede legible en marino en vez de
+   blanco sobre foto. */
+.vm-col{
+  color:var(--marino); text-align:center;
+  background:rgba(255,255,255,.92); border-radius:12px; padding:24px;
+  box-shadow:0 4px 16px rgba(0,0,0,.15);
+  transition:transform .3s ease;
+}
+.vm-col:hover{transform:scale(1.03)}
 .vm-col + .vm-col{margin-top:clamp(40px,6vw,64px)}
-.titulo-vm{font-family:var(--serif); text-transform:uppercase; color:#fff;
+.titulo-vm{font-family:var(--serif); text-transform:uppercase; color:var(--marino);
   font-size:clamp(1.35rem,3.6vw,2.2rem); letter-spacing:.12em;
   margin:0 0 22px; font-weight:400; line-height:1.25; position:relative}
 /* Línea decorativa fina debajo del título, centrada. */
 .titulo-vm::after{content:''; display:block; width:60px; height:2px;
   background:#4a8bc4; margin:10px auto 0}
 .texto-vm{margin:0 auto; max-width:62ch; font-size:clamp(1.05rem,1.7vw,1.32rem);
-  line-height:1.62; color:#dce7f3; text-align:justify; hyphens:auto}
+  line-height:1.62; color:var(--marino); text-align:justify; hyphens:auto}
 @media (min-width:1024px){
   .vm-grid{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start}
   .vm-col + .vm-col{margin-top:0}
@@ -378,11 +392,12 @@ section.marino .sub-titulo{color:#bed0e4}
    la del otro capítulo. Ancho fijo e igual para las dos, alto libre (las
    dos fotos son casi cuadradas) para que nunca se recorten. */
 .figura-capitulo{margin-top:auto}
-.figura-capitulo .caja{width:clamp(150px,42%,260px); max-width:100%; margin:0 auto}
+/* Tamaño +27% en las dos vistas respecto a como estaban antes. */
+.figura-capitulo .caja{width:clamp(190px,53%,330px); max-width:100%; margin:0 auto}
 /* En escritorio (desde donde Sitios de intervención pasa a dos columnas)
-   las dos fotos se ven un 35% más grandes que su tamaño de celular. */
+   las dos fotos se ven bastante más grandes que su tamaño de celular. */
 @media (min-width:901px){
-  .figura-capitulo .caja{width:clamp(202px,57%,351px)}
+  .figura-capitulo .caja{width:clamp(256px,72%,446px)}
 }
 .figura-capitulo .caja img{width:100%; height:auto; display:block;
   filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
@@ -444,7 +459,7 @@ a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
 .persona .retrato img{width:100%; height:100%; object-fit:cover;
   object-position:top center; transform:scale(var(--zoom,1));
   transform-origin:top center; transition:transform .3s ease}
-.persona:hover .retrato img{transform:scale(calc(var(--zoom,1) * 1.05))}
+.persona:hover .retrato img{transform:scale(calc(var(--zoom,1) * 1.03))}
 .persona.recorte-transparente{--zoom:1.30}
 .persona .vacio{position:absolute; inset:0; display:flex; align-items:center;
   justify-content:center; text-align:center; font-family:var(--sans); font-size:.74rem;
@@ -736,9 +751,24 @@ form textarea{min-height:140px; resize:vertical}
   .cabecera:hover .marca .logo-oscuro{opacity:1}
   /* La cabecera ya no empuja el contenido (quedó "fija"/flotante):
      las portadas cortas de las páginas interiores dejan sitio arriba
-     para que la cabecera transparente no tape el rótulo ni el título. */
-  .portada-int{padding-top:calc(clamp(40px,5.5vw,70px) + var(--cab))}
-  .apoyar.portada-donativos{padding-top:calc(clamp(20px,2.5vw,34px) + var(--cab))}
+     para que la cabecera transparente no tape el rótulo ni el título.
+     110px es un colchón fijo y generoso que cubre de sobra tanto la
+     cabecera normal como la .compacta (ambas más altas ahora, ver
+     abajo), sin tener que perseguir el valor exacto de --cab de cada
+     una (esos elementos no son descendientes de .cabecera y no ven su
+     --cab local). */
+  .portada-int{padding-top:calc(clamp(40px,5.5vw,70px) + 110px)}
+  .apoyar.portada-donativos{padding-top:calc(clamp(20px,2.5vw,34px) + 110px)}
+  /* El conjunto logo + submenú + hamburguesa baja un poco más, separado
+     de la franja azul de apoyo. En .compacta (autogestion-donativos,
+     proyectos-investigacion, gracias, privacidad) parte de una base ya
+     más alta, así que también sube más. */
+  :root{--cab:84px}
+  .cabecera.compacta{--cab:98px}
+  /* El hero de index.html baja su contenido para no quedar pegado a la
+     cabecera transparente flotante; el hero crece con el padding
+     (flex+min-height, no se recorta). En celular queda igual. */
+  .portada .wrap{padding-top:clamp(96px,11vw,150px)}
 
   /* ---------- Submenú desplegable ---------- */
   .nav-desk{display:flex; align-items:stretch; gap:clamp(18px,2.2vw,32px); height:100%}
