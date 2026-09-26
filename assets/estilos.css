@@ -99,14 +99,19 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
 .cabecera.fija{box-shadow:0 8px 26px -22px rgba(18,35,63,.55)}
 .cabecera .wrap{display:flex; align-items:center; justify-content:space-between;
   gap:20px; height:var(--cab)}
+/* Cabecera compacta y centrada: para autogestion-donativos.html,
+   proyectos-investigacion.html, gracias.html y privacidad.html
+   (index.html no lleva esta clase, se queda como está). Redefine --cab
+   solo dentro de la cabecera (no toca el resto del sitio, que sigue
+   usando los 62px de siempre para calcular scroll-padding, etc.), así
+   .wrap la hereda sin tocar su propia regla. */
+.cabecera.compacta{--cab:76px}
+.cabecera.compacta .marca img{margin-bottom:5px}
 /* El logo claro y el oscuro ocupan la misma celda (grid-area 1/1) y se
    cruzan con opacidad; cuál se ve depende de --cab-color (ver más abajo,
    punto 1 de la cabecera transparente, solo activo en escritorio). */
 .marca{display:grid; align-items:center}
 .marca img{grid-area:1/1; height:var(--logo); width:auto; transition:opacity .35s ease}
-/* OJO: logo-blanco-siglas-idep-fondo-transparente.png no trae el fondo
-   transparente que su nombre promete (viene con un cuadro casi negro,
-   opaco de por sí) — se avisa en el resumen final. */
 .marca .logo-claro{opacity:0; pointer-events:none}
 .btn-menu{display:flex; align-items:center; justify-content:center; background:none;
   cursor:pointer; border:1px solid var(--linea); border-radius:2px;
@@ -204,7 +209,14 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
   font-family:var(--sans); font-size:.76rem; letter-spacing:.13em;
   text-transform:uppercase; font-weight:600; text-decoration:none; padding:12px 26px;
   border-radius:2px; border:0; cursor:pointer;
-  transition:transform .25s,background .25s,color .25s}
+  transition:transform .25s ease,background .25s ease,color .25s ease,box-shadow .25s ease}
+/* Todos los botones ganan la misma sombra azul sutil al pasar el cursor.
+   El cambio de fondo #2f5c8f→#12233f solo aplica tal cual al botón que
+   ya es azul (.btn-azul); a los demás (blanco sobre el hero, con borde,
+   de línea) forzarles ese mismo fondo los haría perder contraste o
+   confundirse con su propio fondo, así que conservan su propio cambio
+   de color y solo suman la sombra. */
+.btn:hover{box-shadow:0 4px 12px rgba(47,92,143,.4)}
 .btn-solido{background:#fff; color:var(--marino)}
 .btn-solido:hover{transform:translateY(-2px)}
 .btn-linea{border:1px solid rgba(255,255,255,.55); color:#fff}
@@ -258,7 +270,11 @@ section.marino .sub-titulo{color:#bed0e4}
 .valor .icono{width:64px; height:64px; margin:0 auto 14px;
   display:flex; align-items:center; justify-content:center}
 .valor .icono img{max-width:100%; max-height:100%; width:auto; object-fit:contain;
-  filter:brightness(0) invert(1)}
+  filter:brightness(0) invert(1); transition:transform .25s ease,filter .25s ease}
+.valor:hover .icono img{
+  transform:translateY(-4px);
+  filter:brightness(0) invert(1) drop-shadow(0 0 8px rgba(168,200,232,.7));
+}
 .valor .num{font-family:var(--num); font-size:1.5rem; color:var(--azul-claro);
   display:block; line-height:1; margin-bottom:8px}
 .valor h3{margin:0 0 10px; font-size:1.3rem; color:#fff}
@@ -423,11 +439,12 @@ a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
    transparente cuya figura termina al 77 % del archivo, así que se amplía
    para que llegue al borde inferior y no quede flotando. */
 .persona .retrato{aspect-ratio:3/4; overflow:hidden; background:var(--celeste);
-  border-radius:2px; position:relative}
+  border-radius:2px; position:relative; transition:box-shadow .3s ease}
+.persona:hover .retrato{box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .persona .retrato img{width:100%; height:100%; object-fit:cover;
   object-position:top center; transform:scale(var(--zoom,1));
-  transform-origin:top center; transition:transform .7s ease}
-.persona:hover .retrato img{transform:scale(calc(var(--zoom,1) * 1.04))}
+  transform-origin:top center; transition:transform .3s ease}
+.persona:hover .retrato img{transform:scale(calc(var(--zoom,1) * 1.05))}
 .persona.recorte-transparente{--zoom:1.30}
 .persona .vacio{position:absolute; inset:0; display:flex; align-items:center;
   justify-content:center; text-align:center; font-family:var(--sans); font-size:.74rem;
@@ -504,10 +521,18 @@ form textarea{min-height:140px; resize:vertical}
 .paquete{border:1px solid var(--linea); border-radius:2px; background:#fff;
   padding:30px 26px 28px; display:flex; flex-direction:column;
   opacity:0; transform:translateY(80px);
-  transition:opacity .7s ease,transform .7s ease}
+  transition:opacity .7s ease,transform .7s ease,box-shadow .3s ease}
 .paquete.paquete-in{opacity:1; transform:none}
+/* Hover: sombra suave y zoom leve. El "transform .3s" solo se declara
+   aquí (al entrar con el cursor); al salir vuelve con la transición de
+   .7s de arriba, que ya cubre transform con holgura de sobra. */
+.paquete.paquete-in:hover{
+  transform:scale(1.03); box-shadow:0 8px 24px rgba(0,0,0,.12);
+  transition:opacity .7s ease,transform .3s ease,box-shadow .3s ease;
+}
 @media (prefers-reduced-motion:reduce){
   .paquete{opacity:1; transform:none; transition:none}
+  .paquete.paquete-in:hover{transform:none}
 }
 .paquete.destacado{border-color:var(--azul-claro);
   box-shadow:0 26px 50px -38px rgba(18,35,63,.55)}

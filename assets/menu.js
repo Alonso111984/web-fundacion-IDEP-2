@@ -152,21 +152,33 @@
     setTimeout(mostrarTodo, 6000);
   }, 'paquetesFade');
 
-  /* ---------- Parallax suave de la portada ---------- */
+  /* ---------- Parallax suave de la portada ----------
+     Solo escritorio (min-width:1024px); en celular queda desactivado
+     y sin transform alguno. */
   seguro(function(){
     var img = document.getElementById('portadaFondo');
     if(!img){ return; }
     if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
+    if(!(window.matchMedia && window.matchMedia)){ return; }
+    var escritorio = window.matchMedia('(min-width:1024px)');
     var pendiente = false;
     var mover = function(){
+      if(!escritorio.matches){ pendiente = false; return; }
       var y = window.scrollY;
       if(y < 900){ img.style.transform = 'translateY(' + (y * 0.16) + 'px) scale(1.06)'; }
       pendiente = false;
     };
     window.addEventListener('scroll', function(){
+      if(!escritorio.matches){ return; }
       if(!pendiente){ pendiente = true; window.requestAnimationFrame(mover); }
     }, {passive:true});
-    mover();
+    var alCambiarAncho = function(){
+      if(!escritorio.matches){ img.style.transform = ''; }
+      else { mover(); }
+    };
+    if(escritorio.addEventListener){ escritorio.addEventListener('change', alCambiarAncho); }
+    else if(escritorio.addListener){ escritorio.addListener(alCambiarAncho); }
+    alCambiarAncho();
   }, 'parallax');
 
   /* ---------- Formulario de contacto ----------
