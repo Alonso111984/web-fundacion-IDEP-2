@@ -235,10 +235,13 @@ section.marino .sub-titulo{color:#bed0e4}
 
 /* ---------- CORRECCIÓN 12 · Valores ----------
    Fondo con foto del mural y capa marino al 82% para que el blanco del
-   texto y los íconos (invertidos por filtro) queden legibles. */
+   texto y los íconos (invertidos por filtro) queden legibles.
+   OJO: se pidió "plaza.webp", que no existe entre los archivos del
+   proyecto; se usó plaza-dia.webp por ser la más parecida (avisado en
+   el resumen final). */
 #valores{
   position:relative; color:#fff;
-  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/mural.webp');
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/plaza-dia.webp');
   background-size:cover; background-position:center;
 }
 #valores .kicker{color:var(--azul-claro)}
@@ -290,9 +293,13 @@ section.marino .sub-titulo{color:#bed0e4}
 
 /* ---------- Visión y misión ----------
    Las dos vuelven a estar dentro de una sola sección .vm, con fondo
-   compartido azul marino: apiladas en celular, en dos columnas iguales
-   en escritorio (ver breakpoint 1024px más abajo). */
-.vm{background:var(--marino)}
+   compartido: foto del mural con capa marino al 82% (igual en celular
+   y en escritorio); apiladas en celular, en dos columnas iguales en
+   escritorio (ver breakpoint 1024px más abajo). */
+.vm{
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/mural.webp');
+  background-size:cover; background-position:center;
+}
 .vm-grid{display:block}
 .vm-col{color:#fff; text-align:center}
 .vm-col + .vm-col{margin-top:clamp(40px,6vw,64px)}
@@ -381,11 +388,10 @@ section.marino .sub-titulo{color:#bed0e4}
 .caja-apoyo p{color:#c4d4e6; max-width:62ch; margin:0 0 24px}
 
 /* ---------- CORRECCIÓN 19 y PARTE 2.10 · Sitios de interés ----------
-   Fondo con foto de la plaza y capa marino al 82%, igual criterio que
-   Valores institucionales: texto y logos aliados en blanco. */
+   Fondo con foto de las montañas y capa marino al 82%: texto en blanco. */
 #enlaces{
   position:relative; color:#fff;
-  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/hero-plaza.webp');
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/montanas.webp');
   background-size:cover; background-position:center;
 }
 #enlaces .kicker{color:var(--azul-claro)}
@@ -397,24 +403,13 @@ section.marino .sub-titulo{color:#bed0e4}
   justify-content:center; text-align:center; min-height:190px;
   text-decoration:none; transition:border-color .3s,transform .3s}
 a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
-.aliado .marco{height:80px; display:flex; align-items:center;
-  justify-content:center; margin-bottom:16px}
-/* Los logos aliados vienen en color; el filtro los deja en blanco puro
-   para que se lean sobre el fondo oscuro. */
-.aliado .marco img{max-height:100%; max-width:100%; width:auto; object-fit:contain;
-  filter:brightness(0) invert(1)}
-/* CIATOM y TACUARA no traen el archivo con fondo transparente como los
-   demás (su fondo es blanco opaco): con brightness(0) invert(1) el logo
-   y ese fondo blanco terminan del mismo blanco y el logo desaparece.
-   grayscale + contrast alto vuelve el dibujo blanco y negro puros sin
-   importar su color original (así sirve tanto para el negro de CIATOM
-   como para el verde oliva de TACUARA); invert(1) lo deja en negativo
-   (trazo blanco, fondo negro) y mix-blend-mode:screen disuelve ese
-   fondo negro contra la foto de atrás, igual que si fuera transparente. */
-.aliado .marco img[src*="ciatom"],
-.aliado .marco img[src*="tacuara"]{
-  filter:grayscale(1) contrast(20) invert(1); mix-blend-mode:screen;
-}
+/* Los logos, con su propio fondo blanco, van enmarcados en una tarjeta
+   blanca con esquinas redondeadas y sombra: se leen sus colores
+   originales en vez de forzarlos a blanco. */
+.aliado .marco{height:96px; display:flex; align-items:center; justify-content:center;
+  margin-bottom:16px; background:#fff; border-radius:12px; padding:12px;
+  box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.aliado .marco img{max-height:100%; max-width:100%; width:auto; object-fit:contain}
 .aliado .nombre{font-family:var(--sans); font-size:.8rem; letter-spacing:.05em;
   color:#dce7f3; line-height:1.45}
 .aliado.solo-texto .marco{display:none}
@@ -508,8 +503,8 @@ form textarea{min-height:140px; resize:vertical}
   margin-top:clamp(28px,3vw,40px); align-items:stretch}
 .paquete{border:1px solid var(--linea); border-radius:2px; background:#fff;
   padding:30px 26px 28px; display:flex; flex-direction:column;
-  opacity:0; transform:translateY(30px);
-  transition:opacity .6s ease,transform .6s ease}
+  opacity:0; transform:translateY(80px);
+  transition:opacity .7s ease,transform .7s ease}
 .paquete.paquete-in{opacity:1; transform:none}
 @media (prefers-reduced-motion:reduce){
   .paquete{opacity:1; transform:none; transition:none}
@@ -696,14 +691,24 @@ form textarea{min-height:140px; resize:vertical}
     --cab-color:#fff;
     transition:background-color .35s ease,box-shadow .35s ease,top .35s ease,border-color .35s ease;
   }
-  .cabecera.fija{
+  /* Dos activaciones independientes para el estado sólido: pasar el
+     cursor sobre la franja (:hover, se revierte solo al quitar el
+     cursor) y el scroll (.fija, la pone menu.js). Cualquiera de las dos
+     alcanza para el fondo blanco, el logo oscuro y el texto marino. */
+  .cabecera.fija,
+  .cabecera:hover{
     top:0; background:rgba(255,255,255,.97); backdrop-filter:saturate(160%) blur(9px);
     box-shadow:0 2px 12px rgba(0,0,0,.08); --cab-color:var(--marino);
   }
+  /* Antes de hacer scroll, :hover por sí solo no debe fijar la cabecera
+     en la parte superior (top:0): solo el scroll (.fija) hace eso. */
+  .cabecera:hover:not(.fija){top:var(--barra-h)}
   .marca .logo-claro{opacity:1}
   .marca .logo-oscuro{opacity:0}
-  .cabecera.fija .marca .logo-claro{opacity:0}
-  .cabecera.fija .marca .logo-oscuro{opacity:1}
+  .cabecera.fija .marca .logo-claro,
+  .cabecera:hover .marca .logo-claro{opacity:0}
+  .cabecera.fija .marca .logo-oscuro,
+  .cabecera:hover .marca .logo-oscuro{opacity:1}
   /* La cabecera ya no empuja el contenido (quedó "fija"/flotante):
      las portadas cortas de las páginas interiores dejan sitio arriba
      para que la cabecera transparente no tape el rótulo ni el título. */
@@ -722,8 +727,11 @@ form textarea{min-height:140px; resize:vertical}
     height:3px; background:var(--marino); transform:scaleX(0); transform-origin:center;
     transition:transform .25s ease}
   .nav-titulo.activo::after{transform:scaleX(1)}
-  /* Panel: fondo blanco, sombra sutil, aparece al pasar el cursor o al
-     enfocar cualquier enlace de adentro con el teclado (:focus-within). */
+  /* Panel: fondo blanco, sombra sutil, sin líneas divisoras entre las
+     subsecciones. Lo abre menu.js (clase .abierto-panel) con 250ms de
+     margen al salir, para que no se cierre al cruzar el espacio entre
+     el título y el panel; :focus-within queda de respaldo para
+     teclado/sin JS. */
   .nav-panel{
     position:absolute; top:100%; left:50%; transform:translate(-50%,8px);
     min-width:262px; background:#fff; border-radius:4px;
@@ -731,26 +739,33 @@ form textarea{min-height:140px; resize:vertical}
     opacity:0; visibility:hidden; pointer-events:none; margin-top:14px;
     transition:opacity .22s ease,transform .22s ease,visibility .22s;
   }
-  .nav-item:hover .nav-panel,
+  .nav-item.abierto-panel .nav-panel,
   .nav-item:focus-within .nav-panel{
     opacity:1; visibility:visible; pointer-events:auto; transform:translate(-50%,0);
   }
   .nav-panel a{
-    display:flex; align-items:center; justify-content:space-between; gap:14px;
-    padding:11px 12px; border-radius:2px; text-decoration:none;
-    font-family:var(--sans); font-size:.86rem; color:#3a4452; white-space:nowrap;
+    position:relative; display:block; padding:11px 12px; border-radius:2px;
+    text-decoration:none; font-family:var(--sans); font-size:.86rem;
+    color:#3a4452; white-space:nowrap;
   }
   .nav-panel a .txt{border-bottom:1px solid transparent; transition:border-color .2s ease}
-  /* Cajón "Ir a la página": azul medio, texto blanco, aparece con el cursor. */
+  /* Tooltip "Ir a la página": fondo azul medio, texto blanco, aparece
+     debajo del cursor con una punta que señala hacia el texto. */
   .nav-panel a .ir{
+    position:absolute; top:100%; left:50%; transform:translate(-50%,4px);
     font-family:var(--sans); font-size:.64rem; letter-spacing:.08em; font-weight:600;
-    text-transform:uppercase; color:#fff; background:var(--azul); border-radius:2px;
-    padding:4px 9px; flex:0 0 auto; opacity:0; transform:translateX(-4px);
+    text-transform:uppercase; color:#fff; background:var(--azul); border-radius:4px;
+    padding:5px 10px; white-space:nowrap; z-index:1;
+    opacity:0; pointer-events:none;
     transition:opacity .2s ease,transform .2s ease;
+  }
+  .nav-panel a .ir::before{
+    content:''; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-bottom-color:var(--azul);
   }
   .nav-panel a:hover,.nav-panel a:focus-visible{background:var(--celeste-2)}
   .nav-panel a:hover .txt,.nav-panel a:focus-visible .txt{border-color:#3a4452}
-  .nav-panel a:hover .ir,.nav-panel a:focus-visible .ir{opacity:1; transform:none}
+  .nav-panel a:hover .ir,.nav-panel a:focus-visible .ir{opacity:1; transform:translate(-50%,8px)}
   .nav-directo{display:flex; align-items:center}
 }
 @media (min-width:1024px) and (prefers-reduced-motion:reduce){

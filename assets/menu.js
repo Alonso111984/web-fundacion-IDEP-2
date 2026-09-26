@@ -82,6 +82,32 @@
     window.addEventListener('scroll', marcar, {passive:true});
   }, 'cabecera');
 
+  /* ---------- Submenú desplegable de escritorio ----------
+     Al salir el cursor de un título o de su panel, espera 250ms antes
+     de cerrar: así no se cierra si el cursor cruza el espacio entre el
+     título y el panel de camino a él. */
+  seguro(function(){
+    var items = document.querySelectorAll('.nav-item');
+    if(!items.length){ return; }
+    items.forEach(function(item){
+      var temporizador = null;
+      var abrir = function(){
+        if(temporizador){ clearTimeout(temporizador); temporizador = null; }
+        item.classList.add('abierto-panel');
+      };
+      var cerrarConDemora = function(){
+        if(temporizador){ clearTimeout(temporizador); }
+        temporizador = setTimeout(function(){ item.classList.remove('abierto-panel'); }, 250);
+      };
+      item.addEventListener('mouseenter', abrir);
+      item.addEventListener('mouseleave', cerrarConDemora);
+      item.addEventListener('focusin', abrir);
+      item.addEventListener('focusout', function(e){
+        if(!item.contains(e.relatedTarget)){ cerrarConDemora(); }
+      });
+    });
+  }, 'navDesk');
+
   /* ---------- Año del pie ---------- */
   seguro(function(){
     var el = document.getElementById('anio');
