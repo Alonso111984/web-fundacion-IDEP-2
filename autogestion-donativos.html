@@ -74,8 +74,41 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
 <header class="cabecera" id="cabecera">
   <div class="wrap">
     <a class="marca" href="index.html" aria-label="IDEP, inicio">
-      <img src="assets/img/logo-siglas-oscuro-recortado.png" width="720" height="351" alt="IDEP">
+      <img class="logo-claro" src="assets/img/logo-blanco-siglas-idep-fondo-transparente.png" width="720" height="351" alt="IDEP">
+      <img class="logo-oscuro" src="assets/img/logo-siglas-oscuro-recortado.png" width="720" height="351" alt="IDEP">
     </a>
+
+    <!-- Submenú desplegable, solo escritorio (min-width:1024px). -->
+    <nav class="nav-desk" aria-label="Secciones del sitio">
+      <div class="nav-item">
+        <a class="nav-titulo" href="index.html#quienes">EL INSTITUTO</a>
+        <div class="nav-panel">
+          <a href="index.html#quienes"><span class="txt">¿Quiénes somos?</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#valores"><span class="txt">Valores &amp; objetivos</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#mision"><span class="txt">Visión &amp; misión</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#enlaces"><span class="txt">Sitios de interés</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#directorio"><span class="txt">Directorio</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-titulo" href="proyectos-investigacion.html#lineas">INVESTIGACIÓN</a>
+        <div class="nav-panel">
+          <a href="proyectos-investigacion.html#lineas"><span class="txt">Líneas de trabajo</span><span class="ir">Ir a la página</span></a>
+          <a href="proyectos-investigacion.html#sitios"><span class="txt">Sitios de intervención</span><span class="ir">Ir a la página</span></a>
+          <a href="proyectos-investigacion.html#divulgacion"><span class="txt">Investigación &amp; divulgación</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-titulo activo" href="#paquetes">FOMENTO</a>
+        <div class="nav-panel">
+          <a href="index.html#fomento"><span class="txt">Fondo de salvamento</span><span class="ir">Ir a la página</span></a>
+          <a href="#ensayo"><span class="txt">Ensayo SUR</span><span class="ir">Ir a la página</span></a>
+          <a href="#paquetes"><span class="txt">Paquetes de aporte</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <a class="nav-titulo nav-directo" href="index.html#contacto">CONTACTO</a>
+    </nav>
+
     <button class="btn-menu" id="btnMenu" aria-expanded="false" aria-controls="panel" aria-label="Abrir menú">
       <span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
@@ -122,7 +155,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
 </nav>
 <!--#/CHROME-SUPERIOR#-->
 
-<section class="apoyar portada-donativos">
+<section class="apoyar portada-donativos" id="ensayo">
   <div class="wrap">
     <p class="kicker claro">Autogestión &amp; donativos</p>
     <h1>Ensayo SUR</h1>
@@ -137,11 +170,11 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
   </div>
 </section>
 
-<section>
+<section id="paquetes">
   <div class="wrap">
     <div class="cab-seccion rv">
       <p class="kicker">Paquetes de aporte</p>
-      <h2>Tres formas de sostener el programa</h2>
+      <h2>Tres formas de <span class="resalte-claro">sostener el programa</span></h2>
       <p class="lead">El aporte se destina al Fondo de salvamento y memoria andina.</p>
     </div>
 
@@ -154,7 +187,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
     <!-- ################################################################## -->
 
     <div class="paquetes">
-      <article class="paquete rv">
+      <article class="paquete">
         <span class="n">1</span>
         <h3>Paquete Explorador</h3>
         <p class="precio">Precio por definir</p>
@@ -171,7 +204,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
         </div>
       </article>
 
-      <article class="paquete destacado rv">
+      <article class="paquete destacado">
         <span class="n">2</span>
         <h3>Paquete Bandurria</h3>
         <p class="precio">Precio por definir</p>
@@ -189,7 +222,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
         </div>
       </article>
 
-      <article class="paquete rv">
+      <article class="paquete">
         <span class="n">3</span>
         <h3>Paquete Catequilla</h3>
         <p class="precio">Precio por definir</p>

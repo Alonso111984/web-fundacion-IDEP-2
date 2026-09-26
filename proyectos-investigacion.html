@@ -74,8 +74,41 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
 <header class="cabecera" id="cabecera">
   <div class="wrap">
     <a class="marca" href="index.html" aria-label="IDEP, inicio">
-      <img src="assets/img/logo-siglas-oscuro-recortado.png" width="720" height="351" alt="IDEP">
+      <img class="logo-claro" src="assets/img/logo-blanco-siglas-idep-fondo-transparente.png" width="720" height="351" alt="IDEP">
+      <img class="logo-oscuro" src="assets/img/logo-siglas-oscuro-recortado.png" width="720" height="351" alt="IDEP">
     </a>
+
+    <!-- Submenú desplegable, solo escritorio (min-width:1024px). -->
+    <nav class="nav-desk" aria-label="Secciones del sitio">
+      <div class="nav-item">
+        <a class="nav-titulo" href="index.html#quienes">EL INSTITUTO</a>
+        <div class="nav-panel">
+          <a href="index.html#quienes"><span class="txt">¿Quiénes somos?</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#valores"><span class="txt">Valores &amp; objetivos</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#mision"><span class="txt">Visión &amp; misión</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#enlaces"><span class="txt">Sitios de interés</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#directorio"><span class="txt">Directorio</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-titulo activo" href="#lineas">INVESTIGACIÓN</a>
+        <div class="nav-panel">
+          <a href="#lineas"><span class="txt">Líneas de trabajo</span><span class="ir">Ir a la página</span></a>
+          <a href="#sitios"><span class="txt">Sitios de intervención</span><span class="ir">Ir a la página</span></a>
+          <a href="#divulgacion"><span class="txt">Investigación &amp; divulgación</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-titulo" href="index.html#fomento">FOMENTO</a>
+        <div class="nav-panel">
+          <a href="index.html#fomento"><span class="txt">Fondo de salvamento</span><span class="ir">Ir a la página</span></a>
+          <a href="autogestion-donativos.html#ensayo"><span class="txt">Ensayo SUR</span><span class="ir">Ir a la página</span></a>
+          <a href="autogestion-donativos.html#paquetes"><span class="txt">Paquetes de aporte</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <a class="nav-titulo nav-directo" href="index.html#contacto">CONTACTO</a>
+    </nav>
+
     <button class="btn-menu" id="btnMenu" aria-expanded="false" aria-controls="panel" aria-label="Abrir menú">
       <span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
@@ -126,13 +159,13 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
   <div class="wrap">
     <p class="kicker">Proyectos e investigación</p>
     <!-- CORRECCIÓN 14 · el título va con separador " · " y sin punto final. -->
-    <h1>Cuatro líneas de trabajo · Ecuador–Perú</h1>
+    <h1>Cuatro líneas de trabajo · <span class="resalte-claro">Ecuador–Perú</span></h1>
     <p>Un programa binacional que combina intervención en campo, publicación científica, divulgación abierta y sostenibilidad territorial.</p>
   </div>
 </section>
 
 <!-- CORRECCIÓN 24 · pies de foto del cuadro del punto 24. -->
-<section>
+<section id="lineas">
   <div class="wrap">
     <div class="proyectos">
       <article class="proyecto rv">
@@ -205,7 +238,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
 
 <!-- CORRECCIÓN 15 · el título cambia y debajo va "Ecuador y Perú" del mismo tamaño.
      Las imágenes van en su propia fila, todas del mismo tamaño de caja. -->
-<section class="marino">
+<section class="marino" id="sitios">
   <div class="wrap">
     <div class="cab-seccion rv">
       <p class="kicker claro">Sitios de intervención</p>
@@ -246,7 +279,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
 
 <!-- CORRECCIÓN 18 · "Investigación & divulgación" con "&".
      PDF de descarga libre y enlace a la lista de YouTube. -->
-<section class="celeste">
+<section class="celeste" id="divulgacion">
   <div class="wrap">
     <div class="cab-seccion rv">
       <p class="kicker">Investigación &amp; divulgación</p>

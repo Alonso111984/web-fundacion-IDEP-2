@@ -74,8 +74,41 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
 <header class="cabecera" id="cabecera">
   <div class="wrap">
     <a class="marca" href="#inicio" aria-label="IDEP, inicio">
-      <img src="assets/img/logo-siglas-oscuro-recortado.png" width="720" height="351" alt="IDEP">
+      <img class="logo-claro" src="assets/img/logo-blanco-siglas-idep-fondo-transparente.png" width="720" height="351" alt="IDEP">
+      <img class="logo-oscuro" src="assets/img/logo-siglas-oscuro-recortado.png" width="720" height="351" alt="IDEP">
     </a>
+
+    <!-- Submenú desplegable, solo escritorio (min-width:1024px). -->
+    <nav class="nav-desk" aria-label="Secciones del sitio">
+      <div class="nav-item">
+        <a class="nav-titulo activo" href="#quienes">EL INSTITUTO</a>
+        <div class="nav-panel">
+          <a href="#quienes"><span class="txt">¿Quiénes somos?</span><span class="ir">Ir a la página</span></a>
+          <a href="#valores"><span class="txt">Valores &amp; objetivos</span><span class="ir">Ir a la página</span></a>
+          <a href="#mision"><span class="txt">Visión &amp; misión</span><span class="ir">Ir a la página</span></a>
+          <a href="#enlaces"><span class="txt">Sitios de interés</span><span class="ir">Ir a la página</span></a>
+          <a href="#directorio"><span class="txt">Directorio</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-titulo" href="proyectos-investigacion.html#lineas">INVESTIGACIÓN</a>
+        <div class="nav-panel">
+          <a href="proyectos-investigacion.html#lineas"><span class="txt">Líneas de trabajo</span><span class="ir">Ir a la página</span></a>
+          <a href="proyectos-investigacion.html#sitios"><span class="txt">Sitios de intervención</span><span class="ir">Ir a la página</span></a>
+          <a href="proyectos-investigacion.html#divulgacion"><span class="txt">Investigación &amp; divulgación</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-titulo" href="#fomento">FOMENTO</a>
+        <div class="nav-panel">
+          <a href="#fomento"><span class="txt">Fondo de salvamento</span><span class="ir">Ir a la página</span></a>
+          <a href="autogestion-donativos.html#ensayo"><span class="txt">Ensayo SUR</span><span class="ir">Ir a la página</span></a>
+          <a href="autogestion-donativos.html#paquetes"><span class="txt">Paquetes de aporte</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <a class="nav-titulo nav-directo" href="#contacto">CONTACTO</a>
+    </nav>
+
     <button class="btn-menu" id="btnMenu" aria-expanded="false" aria-controls="panel" aria-label="Abrir menú">
       <span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
@@ -131,7 +164,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
     sizes="100vw" width="1922" height="1080" fetchpriority="high" decoding="async" alt="">
   <div class="wrap">
     <h1>INSTITUTO DE ALTOS ESTUDIOS PRECOLOMBINOS&nbsp;<strong>IDEP</strong></h1>
-    <p class="sub">Estudio, protección y promoción del patrimonio arqueológico e histórico de América precolombina, desde una cosmovisión andina y de hemisferio SUR.</p>
+    <p class="sub">Estudio, protección y promoción del patrimonio arqueológico e histórico de América precolombina, desde una <span class="resalte">cosmovisión andina</span> y de <span class="resalte">hemisferio SUR</span>.</p>
     <div class="acciones">
       <a class="btn btn-solido" href="proyectos-investigacion.html">Ver proyectos en curso</a>
       <a class="btn btn-linea" href="#quienes">Conocer el instituto</a>
@@ -145,7 +178,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
   <div class="wrap dos-col">
     <div class="rv">
       <p class="kicker">Quiénes somos</p>
-      <h2>Una organización civil sin fines de lucro · con enfoque cultural y social</h2>
+      <h2>Una organización civil <span class="resalte-claro">sin fines de lucro</span> · con enfoque cultural y social</h2>
       <p class="lead" style="margin-top:24px">El Instituto de Altos Estudios Precolombinos promueve el estudio, protección y promoción del patrimonio arqueológico e histórico de América precolombina, mediante una cosmovisión andina y de hemisferio SUR.</p>
       <p style="color:var(--tinta-suave)">El IDEP se alinea con los desafíos trazados para el siglo XXI: identidad, inclusión, descentralización y resiliencia; contribuyendo así con los Objetivos de Desarrollo Sostenible propuestos por la Organización de Naciones Unidas.</p>
     </div>
@@ -244,20 +277,18 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
   </div>
 </section>
 
-<!-- Visión y misión · las dos secciones forman "Visión & misión" del menú.
-     La visión es nueva; la misión se reemplaza por un solo párrafo. -->
-<section class="vision" id="vision">
-  <div class="wrap">
-    <p class="titulo-vm">Visión</p>
-    <p class="texto-vm rv">Al 2030, ser una organización pionera y referente en la reivindicación, investigación y difusión de los conocimientos y espiritualidad de las naciones andinas primigenias y de hemisferio SUR, fomentando el valor de su cosmovisión.</p>
-  </div>
-</section>
-
-<section class="marino mision" id="mision">
-  <img class="mision-fondo" src="assets/img/mural.webp" loading="lazy" decoding="async" alt="">
-  <div class="wrap">
-    <p class="titulo-vm">Misión</p>
-    <p class="texto-vm rv">Promover el estudio, investigación, protección y difusión del patrimonio arqueológico e histórico de la América precolombina, desde una cosmovisión andina y de hemisferio SUR, contribuyendo a la preservación, comprensión y puesta en valor de su legado cultural.</p>
+<!-- Visión y misión · una sola sección con fondo compartido azul marino,
+     en dos columnas iguales en escritorio y apiladas en celular. -->
+<section class="vm">
+  <div class="wrap vm-grid">
+    <div class="vm-col" id="vision">
+      <p class="titulo-vm">Visión</p>
+      <p class="texto-vm rv">Al 2030, ser una organización pionera y referente en la reivindicación, investigación y difusión de los conocimientos y espiritualidad de las naciones andinas primigenias y de hemisferio SUR, fomentando el valor de su cosmovisión.</p>
+    </div>
+    <div class="vm-col" id="mision">
+      <p class="titulo-vm">Misión</p>
+      <p class="texto-vm rv">Promover el estudio, investigación, protección y difusión del patrimonio arqueológico e histórico de la América precolombina, desde una cosmovisión andina y de hemisferio SUR, contribuyendo a la preservación, comprensión y puesta en valor de su legado cultural.</p>
+    </div>
   </div>
 </section>
 
@@ -266,7 +297,7 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
   <div class="wrap">
     <div class="cab-seccion rv">
       <p class="kicker">Líneas de fomento</p>
-      <h2>Fondo de salvamento y memoria andina</h2>
+      <h2>Fondo de salvamento y <span class="resalte-claro">memoria andina</span></h2>
       <p class="lead">Salvaguarda, investigación, divulgación científica y promoción del patrimonio arqueológico binacional Ecuador–Perú.</p>
     </div>
 

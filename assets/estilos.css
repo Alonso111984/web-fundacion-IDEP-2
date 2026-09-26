@@ -23,6 +23,7 @@
   --ancho:1180px;
   --logo:46px;          /* casi el alto del botón del menú */
   --cab:62px;           /* logo/botón (46) + 8 arriba + 8 abajo */
+  --barra-h:44px;        /* alto de la barra de apoyo en escritorio (una sola línea) */
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:calc(var(--cab) + 10px)}
@@ -48,6 +49,12 @@ h3{font-size:clamp(1.3rem,2.2vw,1.7rem)}
 }
 .kicker.claro{color:var(--azul-claro)}
 .lead{font-size:clamp(1.08rem,1.6vw,1.3rem); color:var(--tinta-suave); line-height:1.68}
+
+/* ---------- Palabras resaltadas ----------
+   .resalte: para texto sobre fondo oscuro. .resalte-claro: sobre fondo
+   claro. Solo cambian de color, sin fondo ni subrayado. */
+.resalte{color:#a8c8e8}
+.resalte-claro{color:#2f5c8f}
 
 /* Pies de foto · estructura fija en todo el sitio:
    <span class="pie-titulo">TÍTULO.</span> <em>texto descriptivo</em>
@@ -87,16 +94,28 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
   position:sticky; top:0; z-index:60; background:rgba(255,255,255,.96);
   backdrop-filter:saturate(160%) blur(9px); border-bottom:1px solid var(--linea);
   transition:box-shadow .3s;
+  --cab-color:var(--tinta);
 }
 .cabecera.fija{box-shadow:0 8px 26px -22px rgba(18,35,63,.55)}
 .cabecera .wrap{display:flex; align-items:center; justify-content:space-between;
   gap:20px; height:var(--cab)}
-.marca{display:flex; align-items:center}
-.marca img{height:var(--logo); width:auto}
+/* El logo claro y el oscuro ocupan la misma celda (grid-area 1/1) y se
+   cruzan con opacidad; cuál se ve depende de --cab-color (ver más abajo,
+   punto 1 de la cabecera transparente, solo activo en escritorio). */
+.marca{display:grid; align-items:center}
+.marca img{grid-area:1/1; height:var(--logo); width:auto; transition:opacity .35s ease}
+/* OJO: logo-blanco-siglas-idep-fondo-transparente.png no trae el fondo
+   transparente que su nombre promete (viene con un cuadro casi negro,
+   opaco de por sí) — se avisa en el resumen final. */
+.marca .logo-claro{opacity:0; pointer-events:none}
 .btn-menu{display:flex; align-items:center; justify-content:center; background:none;
   cursor:pointer; border:1px solid var(--linea); border-radius:2px;
-  width:46px; height:46px; color:var(--tinta); padding:0; flex:0 0 auto}
+  width:46px; height:46px; color:var(--cab-color); padding:0; flex:0 0 auto;
+  transition:color .35s ease}
 .btn-menu:hover{border-color:var(--azul); color:var(--azul)}
+/* El menú de 4 títulos (submenú desplegable) es exclusivo de escritorio;
+   en celular no se ve. Se reactiva en el bloque de 1024px más abajo. */
+.nav-desk{display:none}
 .barras{display:inline-flex; flex-direction:column; gap:4px; width:20px}
 .barras i{height:1.5px; background:currentColor; display:block;
   transition:transform .3s,opacity .3s}
@@ -158,8 +177,17 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
    o apenas por encima del centro, sin aire de más por encima del título. */
 .portada .wrap{position:relative; z-index:2; color:#fff;
   padding-top:clamp(26px,3.5vw,44px); padding-bottom:clamp(44px,6vw,76px)}
-.portada h1{font-size:clamp(1.9rem,5vw,3.9rem); max-width:20ch; text-wrap:balance;
+/* Tamaño reducido un 15% respecto al original clamp(1.9rem,5vw,3.9rem). */
+.portada h1{font-size:clamp(1.615rem,4.25vw,3.315rem); max-width:20ch; text-wrap:balance;
   letter-spacing:.045em; line-height:1.22}
+/* Las siglas IDEP se resaltan con tipografía, sin caja ni fondo: blanco
+   puro, algo más espaciadas y una línea fina de color debajo, separada
+   del texto. */
+.portada h1 strong{
+  font-weight:400; color:#fff; letter-spacing:.08em;
+  text-decoration-line:underline; text-decoration-color:#4a8bc4;
+  text-decoration-thickness:3px; text-underline-offset:6px;
+}
 .portada .sub{max-width:56ch; margin-top:20px; font-size:clamp(1.02rem,1.6vw,1.28rem);
   color:#dce7f3; font-style:italic; line-height:1.6}
 
@@ -205,22 +233,33 @@ section.marino .sub-titulo{color:#bed0e4}
   gap:clamp(30px,5vw,66px); align-items:center}
 .dos-col img{border-radius:2px}
 
-/* ---------- CORRECCIÓN 12 · Valores ---------- */
+/* ---------- CORRECCIÓN 12 · Valores ----------
+   Fondo con foto del mural y capa marino al 82% para que el blanco del
+   texto y los íconos (invertidos por filtro) queden legibles. */
+#valores{
+  position:relative; color:#fff;
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/mural.webp');
+  background-size:cover; background-position:center;
+}
+#valores .kicker{color:var(--azul-claro)}
+#valores h2{color:#fff}
 .valores{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:8px}
-.valor{background:#fff; border:1px solid var(--linea); border-radius:2px;
+.valor{background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.24); border-radius:2px;
   padding:30px 26px 32px; text-align:center;
   transition:transform .3s,box-shadow .3s,border-color .3s}
-.valor:hover{transform:translateY(-4px); box-shadow:0 22px 44px -30px rgba(18,35,63,.5);
-  border-color:var(--azul-claro)}
+.valor:hover{transform:translateY(-4px); box-shadow:0 22px 44px -30px rgba(0,0,0,.5);
+  border-color:#fff}
 /* PARTE 2.3 · los tres íconos a la misma medida.
-   La caja es fija y el dibujo se ajusta dentro sin deformarse. */
+   La caja es fija y el dibujo se ajusta dentro sin deformarse. El filtro
+   los vuelve blancos para que se lean sobre el fondo oscuro. */
 .valor .icono{width:64px; height:64px; margin:0 auto 14px;
   display:flex; align-items:center; justify-content:center}
-.valor .icono img{max-width:100%; max-height:100%; width:auto; object-fit:contain}
+.valor .icono img{max-width:100%; max-height:100%; width:auto; object-fit:contain;
+  filter:brightness(0) invert(1)}
 .valor .num{font-family:var(--num); font-size:1.5rem; color:var(--azul-claro);
   display:block; line-height:1; margin-bottom:8px}
-.valor h3{margin:0 0 10px; font-size:1.3rem}
-.valor p{margin:0; color:var(--tinta-suave); font-size:1rem; line-height:1.65}
+.valor h3{margin:0 0 10px; font-size:1.3rem; color:#fff}
+.valor p{margin:0; color:#dce7f3; font-size:1rem; line-height:1.65}
 
 /* ---------- CORRECCIÓN 13 · Objetivos estratégicos ----------
    Fondo BLANCO (no celeste), números grandes en Bodoni Moda
@@ -250,25 +289,25 @@ section.marino .sub-titulo{color:#bed0e4}
 }
 
 /* ---------- Visión y misión ----------
-   Las dos secciones forman "Visión & misión". Texto centrado y los dos
-   títulos del mismo tamaño, mayores que un rótulo normal. */
-.mision{position:relative; overflow:hidden; background:var(--marino-2)}
-.mision-fondo{position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; opacity:.20}
-.mision .wrap{position:relative; z-index:2; text-align:center}
-/* La Visión lleva su propio fondo sólido para separarla de Objetivos
-   estratégicos (blanco) y de Misión (marino con mural de fondo). */
-.vision{background:var(--azul)}
-.vision .wrap{text-align:center}
-.titulo-vm{font-family:var(--serif); text-transform:uppercase;
-  font-size:clamp(1.35rem,3.6vw,2.2rem); letter-spacing:clamp(.1em,.7vw,.2em);
-  margin:0 0 22px; font-weight:400; line-height:1.25}
-.mision .titulo-vm{color:var(--azul-claro)}
-.vision .titulo-vm{color:var(--blanco)}
+   Las dos vuelven a estar dentro de una sola sección .vm, con fondo
+   compartido azul marino: apiladas en celular, en dos columnas iguales
+   en escritorio (ver breakpoint 1024px más abajo). */
+.vm{background:var(--marino)}
+.vm-grid{display:block}
+.vm-col{color:#fff; text-align:center}
+.vm-col + .vm-col{margin-top:clamp(40px,6vw,64px)}
+.titulo-vm{font-family:var(--serif); text-transform:uppercase; color:#fff;
+  font-size:clamp(1.35rem,3.6vw,2.2rem); letter-spacing:.12em;
+  margin:0 0 22px; font-weight:400; line-height:1.25; position:relative}
+/* Línea decorativa fina debajo del título, centrada. */
+.titulo-vm::after{content:''; display:block; width:60px; height:2px;
+  background:#4a8bc4; margin:10px auto 0}
 .texto-vm{margin:0 auto; max-width:62ch; font-size:clamp(1.05rem,1.7vw,1.32rem);
-  line-height:1.62}
-.mision .texto-vm{color:#dce7f3}
-.vision .texto-vm{color:#dce7f3}
+  line-height:1.62; color:#dce7f3; text-align:justify; hyphens:auto}
+@media (min-width:1024px){
+  .vm-grid{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start}
+  .vm-col + .vm-col{margin-top:0}
+}
 
 /* ---------- Proyectos ---------- */
 .proyectos{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(22px,3vw,34px)}
@@ -317,6 +356,11 @@ section.marino .sub-titulo{color:#bed0e4}
    dos fotos son casi cuadradas) para que nunca se recorten. */
 .figura-capitulo{margin-top:auto}
 .figura-capitulo .caja{width:clamp(150px,42%,260px); max-width:100%; margin:0 auto}
+/* En escritorio (desde donde Sitios de intervención pasa a dos columnas)
+   las dos fotos se ven un 35% más grandes que su tamaño de celular. */
+@media (min-width:901px){
+  .figura-capitulo .caja{width:clamp(202px,57%,351px)}
+}
 .figura-capitulo .caja img{width:100%; height:auto; display:block;
   filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
   transition:transform .7s ease}
@@ -336,22 +380,46 @@ section.marino .sub-titulo{color:#bed0e4}
 .caja-apoyo h3{color:#fff; margin-bottom:14px}
 .caja-apoyo p{color:#c4d4e6; max-width:62ch; margin:0 0 24px}
 
-/* ---------- CORRECCIÓN 19 y PARTE 2.10 · Sitios de interés ---------- */
+/* ---------- CORRECCIÓN 19 y PARTE 2.10 · Sitios de interés ----------
+   Fondo con foto de la plaza y capa marino al 82%, igual criterio que
+   Valores institucionales: texto y logos aliados en blanco. */
+#enlaces{
+  position:relative; color:#fff;
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/hero-plaza.webp');
+  background-size:cover; background-position:center;
+}
+#enlaces .kicker{color:var(--azul-claro)}
+#enlaces h2{color:#fff}
 .aliados{display:grid; grid-template-columns:repeat(4,1fr);
   gap:clamp(20px,3vw,30px); margin-top:clamp(28px,3vw,40px)}
-.aliado{border:1px solid var(--linea); border-radius:2px; background:#fff;
+.aliado{border:1px solid rgba(255,255,255,.24); border-radius:2px; background:rgba(255,255,255,.07);
   padding:26px 20px; display:flex; flex-direction:column; align-items:center;
   justify-content:center; text-align:center; min-height:190px;
   text-decoration:none; transition:border-color .3s,transform .3s}
-a.aliado:hover{border-color:var(--azul-claro); transform:translateY(-3px)}
+a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
 .aliado .marco{height:80px; display:flex; align-items:center;
   justify-content:center; margin-bottom:16px}
-.aliado .marco img{max-height:100%; max-width:100%; width:auto; object-fit:contain}
+/* Los logos aliados vienen en color; el filtro los deja en blanco puro
+   para que se lean sobre el fondo oscuro. */
+.aliado .marco img{max-height:100%; max-width:100%; width:auto; object-fit:contain;
+  filter:brightness(0) invert(1)}
+/* CIATOM y TACUARA no traen el archivo con fondo transparente como los
+   demás (su fondo es blanco opaco): con brightness(0) invert(1) el logo
+   y ese fondo blanco terminan del mismo blanco y el logo desaparece.
+   grayscale + contrast alto vuelve el dibujo blanco y negro puros sin
+   importar su color original (así sirve tanto para el negro de CIATOM
+   como para el verde oliva de TACUARA); invert(1) lo deja en negativo
+   (trazo blanco, fondo negro) y mix-blend-mode:screen disuelve ese
+   fondo negro contra la foto de atrás, igual que si fuera transparente. */
+.aliado .marco img[src*="ciatom"],
+.aliado .marco img[src*="tacuara"]{
+  filter:grayscale(1) contrast(20) invert(1); mix-blend-mode:screen;
+}
 .aliado .nombre{font-family:var(--sans); font-size:.8rem; letter-spacing:.05em;
-  color:var(--tinta-suave); line-height:1.45}
+  color:#dce7f3; line-height:1.45}
 .aliado.solo-texto .marco{display:none}
 .aliado.solo-texto .titulo{font-family:var(--serif); font-size:1.15rem;
-  color:var(--tinta); margin-bottom:8px; line-height:1.25}
+  color:#fff; margin-bottom:8px; line-height:1.25}
 
 /* ---------- CORRECCIÓN 20 · Directorio ---------- */
 .equipo{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(24px,3vw,38px)}
@@ -439,7 +507,13 @@ form textarea{min-height:140px; resize:vertical}
 .paquetes{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
   margin-top:clamp(28px,3vw,40px); align-items:stretch}
 .paquete{border:1px solid var(--linea); border-radius:2px; background:#fff;
-  padding:30px 26px 28px; display:flex; flex-direction:column}
+  padding:30px 26px 28px; display:flex; flex-direction:column;
+  opacity:0; transform:translateY(30px);
+  transition:opacity .6s ease,transform .6s ease}
+.paquete.paquete-in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  .paquete{opacity:1; transform:none; transition:none}
+}
 .paquete.destacado{border-color:var(--azul-claro);
   box-shadow:0 26px 50px -38px rgba(18,35,63,.55)}
 .paquete .n{font-family:var(--num); font-size:1.6rem; color:#404040;
@@ -597,4 +671,88 @@ form textarea{min-height:140px; resize:vertical}
   .acciones .btn{width:100%}
   .aliados{grid-template-columns:1fr}
   .portada .wrap{padding-top:22px; padding-bottom:34px}
+}
+
+/* =====================================================================
+   ESCRITORIO · min-width 1024px
+   Tamaño de texto base, cabecera transparente-a-sólida y submenú.
+   ===================================================================== */
+@media (min-width:1024px){
+  /* ---------- Tamaño de texto base, un 10% mayor ---------- */
+  html{font-size:17.6px}
+  body{font-size:20.9px}
+
+  /* ---------- Logo más grande ---------- */
+  :root{--logo:58px}
+
+  /* ---------- Cabecera transparente sobre el tope, sólida al bajar ----------
+     En celular la cabecera se queda tal como estaba (sticky, blanca).
+     Aquí pasa a fija (flota sobre el contenido) y arranca transparente,
+     justo debajo de la barra de apoyo (--barra-h); al pasar los 44px de
+     scroll, menu.js añade .fija y se vuelve blanca y sólida. */
+  .cabecera{
+    position:fixed; top:var(--barra-h); left:0; right:0;
+    background:transparent; border-bottom:none; backdrop-filter:none; box-shadow:none;
+    --cab-color:#fff;
+    transition:background-color .35s ease,box-shadow .35s ease,top .35s ease,border-color .35s ease;
+  }
+  .cabecera.fija{
+    top:0; background:rgba(255,255,255,.97); backdrop-filter:saturate(160%) blur(9px);
+    box-shadow:0 2px 12px rgba(0,0,0,.08); --cab-color:var(--marino);
+  }
+  .marca .logo-claro{opacity:1}
+  .marca .logo-oscuro{opacity:0}
+  .cabecera.fija .marca .logo-claro{opacity:0}
+  .cabecera.fija .marca .logo-oscuro{opacity:1}
+  /* La cabecera ya no empuja el contenido (quedó "fija"/flotante):
+     las portadas cortas de las páginas interiores dejan sitio arriba
+     para que la cabecera transparente no tape el rótulo ni el título. */
+  .portada-int{padding-top:calc(clamp(40px,5.5vw,70px) + var(--cab))}
+  .apoyar.portada-donativos{padding-top:calc(clamp(20px,2.5vw,34px) + var(--cab))}
+
+  /* ---------- Submenú desplegable ---------- */
+  .nav-desk{display:flex; align-items:stretch; gap:clamp(18px,2.2vw,32px); height:100%}
+  .nav-item{position:relative; display:flex; align-items:center}
+  .nav-titulo{
+    font-family:var(--sans); font-size:.76rem; letter-spacing:.1em; font-weight:600;
+    text-transform:uppercase; text-decoration:none; color:var(--cab-color);
+    position:relative; padding:8px 1px; transition:color .35s ease;
+  }
+  .nav-titulo::after{content:''; position:absolute; left:0; right:0; bottom:-3px;
+    height:3px; background:var(--marino); transform:scaleX(0); transform-origin:center;
+    transition:transform .25s ease}
+  .nav-titulo.activo::after{transform:scaleX(1)}
+  /* Panel: fondo blanco, sombra sutil, aparece al pasar el cursor o al
+     enfocar cualquier enlace de adentro con el teclado (:focus-within). */
+  .nav-panel{
+    position:absolute; top:100%; left:50%; transform:translate(-50%,8px);
+    min-width:262px; background:#fff; border-radius:4px;
+    box-shadow:0 22px 44px -20px rgba(18,35,63,.35); padding:10px;
+    opacity:0; visibility:hidden; pointer-events:none; margin-top:14px;
+    transition:opacity .22s ease,transform .22s ease,visibility .22s;
+  }
+  .nav-item:hover .nav-panel,
+  .nav-item:focus-within .nav-panel{
+    opacity:1; visibility:visible; pointer-events:auto; transform:translate(-50%,0);
+  }
+  .nav-panel a{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:11px 12px; border-radius:2px; text-decoration:none;
+    font-family:var(--sans); font-size:.86rem; color:#3a4452; white-space:nowrap;
+  }
+  .nav-panel a .txt{border-bottom:1px solid transparent; transition:border-color .2s ease}
+  /* Cajón "Ir a la página": azul medio, texto blanco, aparece con el cursor. */
+  .nav-panel a .ir{
+    font-family:var(--sans); font-size:.64rem; letter-spacing:.08em; font-weight:600;
+    text-transform:uppercase; color:#fff; background:var(--azul); border-radius:2px;
+    padding:4px 9px; flex:0 0 auto; opacity:0; transform:translateX(-4px);
+    transition:opacity .2s ease,transform .2s ease;
+  }
+  .nav-panel a:hover,.nav-panel a:focus-visible{background:var(--celeste-2)}
+  .nav-panel a:hover .txt,.nav-panel a:focus-visible .txt{border-color:#3a4452}
+  .nav-panel a:hover .ir,.nav-panel a:focus-visible .ir{opacity:1; transform:none}
+  .nav-directo{display:flex; align-items:center}
+}
+@media (min-width:1024px) and (prefers-reduced-motion:reduce){
+  .cabecera,.marca img,.btn-menu,.nav-titulo::after,.nav-panel,.nav-panel a .ir{transition:none}
 }

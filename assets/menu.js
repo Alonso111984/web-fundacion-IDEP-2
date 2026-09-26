@@ -67,12 +67,15 @@
     });
   }, 'menu');
 
-  /* ---------- Cabecera al desplazar ---------- */
+  /* ---------- Cabecera al desplazar ----------
+     El umbral (44px) coincide con --barra-h en estilos.css: es lo que
+     mide la barra de apoyo en escritorio, así la cabecera pasa a sólida
+     justo cuando la barra ya se desplazó fuera de la pantalla. */
   seguro(function(){
     var cab = document.getElementById('cabecera');
     if(!cab){ return; }
     var marcar = function(){
-      if(window.scrollY > 24){ cab.classList.add('fija'); }
+      if(window.scrollY > 44){ cab.classList.add('fija'); }
       else { cab.classList.remove('fija'); }
     };
     marcar();
@@ -101,6 +104,27 @@
     for(var i=0;i<items.length;i++){ obs.observe(items[i]); }
     setTimeout(mostrarTodo, 6000);
   }, 'reveal');
+
+  /* ---------- Paquetes de aporte: aparición escalonada ----------
+     Cada tarjeta aparece 150ms después de la anterior, mediante
+     IntersectionObserver. Respeta prefers-reduced-motion. */
+  seguro(function(){
+    var items = document.querySelectorAll('.paquete');
+    if(!items.length){ return; }
+    var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var mostrarTodo = function(){
+      for(var i=0;i<items.length;i++){ items[i].classList.add('paquete-in'); }
+    };
+    if(reducido || !('IntersectionObserver' in window)){ mostrarTodo(); return; }
+    for(var i=0;i<items.length;i++){ items[i].style.transitionDelay = (i*150)+'ms'; }
+    var obs = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('paquete-in'); obs.unobserve(en.target); }
+      });
+    }, {threshold:0.15});
+    for(var i=0;i<items.length;i++){ obs.observe(items[i]); }
+    setTimeout(mostrarTodo, 6000);
+  }, 'paquetesFade');
 
   /* ---------- Parallax suave de la portada ---------- */
   seguro(function(){
