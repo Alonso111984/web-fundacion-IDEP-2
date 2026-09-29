@@ -188,14 +188,14 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
    line-height más generoso (en vez de 1.22) para que las tres líneas
    queden a la misma distancia entre sí: IDEP es más grande que el resto
    y, si no, su propia línea quedaría con más aire que las otras dos. */
-.portada h1{font-size:clamp(1.615rem,4.25vw,3.315rem); max-width:20ch; text-wrap:balance;
+.portada h1{font-size:clamp(1.615rem,4.25vw,3.315rem); max-width:26ch;
   letter-spacing:.045em; line-height:1.45}
 /* IDEP domina el título: 30% más grande, negrita y en verde intermedio,
    sin línea decorativa ni subrayado. line-height:1 en el propio <strong>
    para que no sume más aire encima del que ya da el line-height del h1. */
 .portada h1 strong{
-  font-weight:700; color:#c41e3a; font-size:1.3em; line-height:1;
-  transition:color .35s ease;
+  display:inline-block; white-space:nowrap;
+  font-weight:700; color:#ff9500; font-size:1.3em; line-height:1;
 }
 .portada .sub{max-width:56ch; margin-top:20px; font-size:clamp(1.02rem,1.6vw,1.28rem);
   color:#dce7f3; font-style:italic; line-height:1.6}
@@ -266,9 +266,18 @@ section.marino .sub-titulo{color:#bed0e4}
 .valores{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:8px}
 .valor{background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.24); border-radius:2px;
   padding:30px 26px 32px; text-align:center;
-  transition:transform .3s,box-shadow .3s,border-color .3s}
-.valor:hover{transform:translateY(-4px); box-shadow:0 22px 44px -30px rgba(0,0,0,.5);
-  border-color:#fff}
+  opacity:0; transform:scale(.9);
+  transition:opacity .6s ease,transform .6s ease,box-shadow .3s,border-color .3s}
+/* Al entrar en pantalla (clase que pone menu.js con 80ms de retraso entre
+   tarjetas) aparecen con fade + zoom. El hover se conserva redeclarando la
+   transición a .3s una vez ya visibles. */
+.valor.valor-in{opacity:1; transform:none}
+.valor.valor-in:hover{transform:translateY(-4px); box-shadow:0 22px 44px -30px rgba(0,0,0,.5);
+  border-color:#fff; transition:transform .3s,box-shadow .3s,border-color .3s}
+@media (prefers-reduced-motion:reduce){
+  .valor{opacity:1; transform:none; transition:none}
+  .valor.valor-in:hover{transform:none}
+}
 /* PARTE 2.3 · los tres íconos a la misma medida.
    La caja es fija y el dibujo se ajusta dentro sin deformarse. El filtro
    los vuelve blancos para que se lean sobre el fondo oscuro. */
@@ -410,8 +419,9 @@ section.marino .sub-titulo{color:#bed0e4}
    se recorta y baja un poco para que quede a la misma altura visual
    que la Colección DALMAU, que sí llena su cuadro. */
 .caja-spondylus{overflow:hidden}
-.caja-spondylus img{transform:scale(1.22) translateY(6%)}
-.figura-capitulo:hover .caja-spondylus img{transform:scale(1.22) translateY(6%) scale(1.04)}
+.caja-spondylus img{transform:scale(1.22) translateY(0)}
+.figura-capitulo:hover .caja-spondylus img{transform:scale(1.22) scale(1.04)}
+.caja-spondylus + figcaption{margin-top:-10px}
 /* Reserva el alto de hasta 2 líneas de pie de foto: como los dos pies
    tienen distinto largo, sin esto la foto con el pie más corto queda más
    abajo que la otra y se pierde la alineación. */
@@ -549,7 +559,7 @@ form textarea{min-height:140px; resize:vertical}
   margin-top:clamp(28px,3vw,40px); align-items:stretch}
 .paquete{border:1px solid var(--linea); border-radius:2px; background:#fff;
   padding:30px 26px 28px; display:flex; flex-direction:column;
-  opacity:0; transform:translateY(80px);
+  opacity:0; transform:scale(.95);
   transition:opacity .7s ease,transform .7s ease,box-shadow .3s ease}
 .paquete.paquete-in{opacity:1; transform:none}
 /* Hover: sombra suave y zoom leve. El "transform .3s" solo se declara
@@ -602,6 +612,15 @@ form textarea{min-height:140px; resize:vertical}
 .recurso h3{font-size:1.25rem; margin-bottom:12px}
 .recurso p{color:var(--tinta-suave); margin:0 0 20px}
 .recurso .btn{margin-top:auto; width:100%; white-space:nowrap}
+/* Separador entre los 3 recursos: solo en celular (en escritorio ya van en
+   columnas y no hace falta). En celular el grid deja de sumar gap para que
+   la única separación sea la del <hr> (2rem arriba y abajo). */
+.sep-recurso{display:none}
+@media (max-width:768px){
+  .sep-recurso{display:block; width:100%; height:0; border:0;
+    border-top:0.5px solid rgba(47,92,143,.3); margin:2rem 0}
+  .recursos-3{gap:0}
+}
 
 /* ---------- Bloques pendientes ---------- */
 .pendiente{border:1px dashed var(--azul-claro); border-radius:2px; padding:28px 26px;
@@ -694,6 +713,7 @@ form textarea{min-height:140px; resize:vertical}
   .apoyar-grid img{max-width:300px; margin:0 auto}
   .aporte-libre{flex-direction:column; align-items:flex-start}
   .valores{gap:18px}
+  .sitios > div + div{margin-top:70px}
   .equipo{max-width:380px}
   .portada{min-height:clamp(400px,calc(74vh - var(--cab)),540px)}
   .pie-grid{gap:clamp(24px,5vw,34px)}

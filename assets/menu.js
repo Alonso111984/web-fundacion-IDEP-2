@@ -132,8 +132,10 @@
   }, 'reveal');
 
   /* ---------- Paquetes de aporte: aparición escalonada ----------
-     Cada tarjeta aparece 150ms después de la anterior, mediante
-     IntersectionObserver. Respeta prefers-reduced-motion. */
+     Cada tarjeta aparece (fade + zoom desde scale .95) 100ms después de la
+     anterior, mediante IntersectionObserver. El retraso se aplica con
+     setTimeout (no con transition-delay) para que el hover posterior no
+     herede la demora. Respeta prefers-reduced-motion. */
   seguro(function(){
     var items = document.querySelectorAll('.paquete');
     if(!items.length){ return; }
@@ -142,15 +144,44 @@
       for(var i=0;i<items.length;i++){ items[i].classList.add('paquete-in'); }
     };
     if(reducido || !('IntersectionObserver' in window)){ mostrarTodo(); return; }
-    for(var i=0;i<items.length;i++){ items[i].style.transitionDelay = (i*150)+'ms'; }
     var obs = new IntersectionObserver(function(entradas){
       entradas.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.add('paquete-in'); obs.unobserve(en.target); }
+        if(en.isIntersecting){
+          var idx = Array.prototype.indexOf.call(items, en.target);
+          setTimeout(function(t){ return function(){ t.classList.add('paquete-in'); }; }(en.target), Math.max(0, idx) * 100);
+          obs.unobserve(en.target);
+        }
       });
     }, {threshold:0.15});
     for(var i=0;i<items.length;i++){ obs.observe(items[i]); }
     setTimeout(mostrarTodo, 6000);
   }, 'paquetesFade');
+
+  /* ---------- Valores institucionales: aparición escalonada ----------
+     Las tres tarjetas de símbolos aparecen (fade + zoom desde scale .9)
+     80ms después de la anterior. Mismo patrón que los paquetes: retraso
+     con setTimeout para no ensuciar el hover, red de seguridad a los 6s y
+     respeto a prefers-reduced-motion. */
+  seguro(function(){
+    var items = document.querySelectorAll('.valor');
+    if(!items.length){ return; }
+    var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var mostrarTodo = function(){
+      for(var i=0;i<items.length;i++){ items[i].classList.add('valor-in'); }
+    };
+    if(reducido || !('IntersectionObserver' in window)){ mostrarTodo(); return; }
+    var obs = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(en){
+        if(en.isIntersecting){
+          var idx = Array.prototype.indexOf.call(items, en.target);
+          setTimeout(function(t){ return function(){ t.classList.add('valor-in'); }; }(en.target), Math.max(0, idx) * 80);
+          obs.unobserve(en.target);
+        }
+      });
+    }, {threshold:0.15});
+    for(var i=0;i<items.length;i++){ obs.observe(items[i]); }
+    setTimeout(mostrarTodo, 6000);
+  }, 'valoresFade');
 
   /* ---------- Parallax suave de la portada ----------
      Solo escritorio (min-width:1024px); en celular queda desactivado
