@@ -51,10 +51,12 @@ h3{font-size:clamp(1.3rem,2.2vw,1.7rem)}
 .lead{font-size:clamp(1.08rem,1.6vw,1.3rem); color:var(--tinta-suave); line-height:1.68}
 
 /* ---------- Palabras resaltadas ----------
-   .resalte: para texto sobre fondo oscuro. .resalte-claro: sobre fondo
-   claro. Solo cambian de color, sin fondo ni subrayado. */
+   .resalte-bold: negrita; el color de cada palabra va aparte, inline
+   por palabra (cada una tiene su propio color pedido). .resalte y
+   .resalte-claro quedan de respaldo por si algo no se migró. */
 .resalte{color:#a8c8e8}
 .resalte-claro{color:#2f5c8f}
+.resalte-bold{font-weight:700}
 
 /* Pies de foto · estructura fija en todo el sitio:
    <span class="pie-titulo">TÍTULO.</span> <em>texto descriptivo</em>
@@ -182,18 +184,17 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
    o apenas por encima del centro, sin aire de más por encima del título. */
 .portada .wrap{position:relative; z-index:2; color:#fff;
   padding-top:clamp(26px,3.5vw,44px); padding-bottom:clamp(44px,6vw,76px)}
-/* Tamaño reducido un 15% respecto al original clamp(1.9rem,5vw,3.9rem). */
+/* Tamaño reducido un 15% respecto al original clamp(1.9rem,5vw,3.9rem).
+   line-height más generoso (en vez de 1.22) para que las tres líneas
+   queden a la misma distancia entre sí: IDEP es más grande que el resto
+   y, si no, su propia línea quedaría con más aire que las otras dos. */
 .portada h1{font-size:clamp(1.615rem,4.25vw,3.315rem); max-width:20ch; text-wrap:balance;
-  letter-spacing:.045em; line-height:1.22}
-/* Las siglas IDEP se resaltan con tipografía, sin caja ni fondo: blanco
-   puro, algo más espaciadas y una línea fina de color debajo, separada
-   del texto. */
-/* IDEP domina el título: 25% más grande y en azul claro luminoso
-   en vez de blanco, con la misma línea decorativa debajo. */
+  letter-spacing:.045em; line-height:1.45}
+/* IDEP domina el título: 30% más grande, negrita y en verde intermedio,
+   sin línea decorativa ni subrayado. line-height:1 en el propio <strong>
+   para que no sume más aire encima del que ya da el line-height del h1. */
 .portada h1 strong{
-  font-weight:400; color:#4a8bc4; font-size:1.25em; letter-spacing:.08em;
-  text-decoration-line:underline; text-decoration-color:#4a8bc4;
-  text-decoration-thickness:3px; text-underline-offset:6px;
+  font-weight:700; color:#2d7a4a; font-size:1.3em; line-height:1;
   transition:color .35s ease;
 }
 .portada .sub{max-width:56ch; margin-top:20px; font-size:clamp(1.02rem,1.6vw,1.28rem);
@@ -246,19 +247,18 @@ section.marino .sub-titulo{color:#bed0e4}
 /* ---------- Quiénes somos ---------- */
 .dos-col{display:grid; grid-template-columns:1.15fr .85fr;
   gap:clamp(30px,5vw,66px); align-items:center}
-.dos-col figure{overflow:hidden; border-radius:2px}
+/* Imagen ~22% más chica que antes (dentro del 20-25% pedido), centrada
+   en su columna. */
+.dos-col figure{overflow:hidden; border-radius:2px; max-width:78%; margin:0 auto}
 .dos-col img{border-radius:2px; transition:transform .3s ease}
 .dos-col figure:hover img{transform:scale(1.03)}
 
 /* ---------- CORRECCIÓN 12 · Valores ----------
-   Fondo con foto del mural y capa marino al 82% para que el blanco del
-   texto y los íconos (invertidos por filtro) queden legibles.
-   OJO: se pidió "plaza.webp", que no existe entre los archivos del
-   proyecto; se usó plaza-dia.webp por ser la más parecida (avisado en
-   el resumen final). */
+   Fondo con foto de Pomasqui y capa marino al 82% para que el blanco
+   del texto y los íconos (invertidos por filtro) queden legibles. */
 #valores{
   position:relative; color:#fff;
-  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/plaza-dia.webp');
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/pomasqui.jpg');
   background-size:cover; background-position:center;
 }
 #valores .kicker{color:var(--azul-claro)}
@@ -322,23 +322,25 @@ section.marino .sub-titulo{color:#bed0e4}
   background-size:cover; background-position:center;
 }
 .vm-grid{display:block}
-/* Cada texto va en su propia tarjeta blanca (92% de opacidad) sobre la
-   foto del mural, para que el texto quede legible en marino en vez de
-   blanco sobre foto. */
+/* Cada texto va en su propia tarjeta blanca (70% de opacidad, esquinas
+   rectas) sobre la foto del mural, para que el texto quede legible en
+   marino en vez de blanco sobre foto. */
 .vm-col{
   color:var(--marino); text-align:center;
-  background:rgba(255,255,255,.92); border-radius:12px; padding:24px;
+  background:rgba(255,255,255,.70); border-radius:0; padding:24px;
   box-shadow:0 4px 16px rgba(0,0,0,.15);
   transition:transform .3s ease;
 }
 .vm-col:hover{transform:scale(1.03)}
 .vm-col + .vm-col{margin-top:clamp(40px,6vw,64px)}
-.titulo-vm{font-family:var(--serif); text-transform:uppercase; color:var(--marino);
-  font-size:clamp(1.35rem,3.6vw,2.2rem); letter-spacing:.12em;
-  margin:0 0 22px; font-weight:400; line-height:1.25; position:relative}
-/* Línea decorativa fina debajo del título, centrada. */
-.titulo-vm::after{content:''; display:block; width:60px; height:2px;
-  background:#4a8bc4; margin:10px auto 0}
+/* Título con un símbolo a cada lado, los tres centrados verticalmente. */
+.titulo-vm{
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  font-family:var(--serif); text-transform:uppercase; color:var(--marino);
+  font-size:clamp(1.35rem,3.6vw,2.2rem);
+  margin:0 0 22px; font-weight:400; line-height:1.25;
+}
+.titulo-vm img{width:48px; height:48px; object-fit:contain; flex:0 0 auto}
 .texto-vm{margin:0 auto; max-width:62ch; font-size:clamp(1.05rem,1.7vw,1.32rem);
   line-height:1.62; color:var(--marino); text-align:justify; hyphens:auto}
 @media (min-width:1024px){
@@ -468,6 +470,11 @@ a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
 .persona .cargo{font-family:var(--sans); font-size:.73rem; letter-spacing:.13em;
   text-transform:uppercase; color:var(--azul); font-weight:600; line-height:1.5}
 .persona .bio{font-size:.96rem; color:var(--tinta-suave); line-height:1.6; margin:14px 0 0}
+/* Colaboradores: mismas tarjetas del directorio, pero sin foto. */
+.persona.sin-foto{text-align:center; background:#fff; border:1px solid var(--linea);
+  border-radius:2px; padding:30px 24px}
+.persona.sin-foto h3{margin:0 0 6px}
+.persona.sin-foto .cargo{margin:0}
 
 /* ---------- CORRECCIÓN 21 · Contacto ---------- */
 .contacto-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(30px,5vw,64px)}
@@ -553,6 +560,9 @@ form textarea{min-height:140px; resize:vertical}
   box-shadow:0 26px 50px -38px rgba(18,35,63,.55)}
 .paquete .n{font-family:var(--num); font-size:1.6rem; color:#404040;
   line-height:1; display:block}
+/* Mismos números (imagen) que Objetivos estratégicos, a tamaño de
+   insignia de tarjeta. */
+.paquete .n img{width:40px; height:auto}
 .paquete h3{font-size:1.2rem; margin:12px 0 6px; text-transform:uppercase;
   letter-spacing:.04em}
 .paquete .precio{font-family:var(--sans); font-size:.74rem; letter-spacing:.14em;
@@ -575,8 +585,14 @@ form textarea{min-height:140px; resize:vertical}
 
 /* ---------- Descargas y enlaces ---------- */
 .recursos{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,60px)}
+/* Los tres recursos (presentación, programa, YouTube) lado a lado en
+   escritorio; en celular caen en una sola columna, en el mismo orden
+   del documento (presentación → programa → YouTube). */
+.recursos-3{grid-template-columns:repeat(3,1fr)}
+.recurso{display:flex; flex-direction:column}
 .recurso h3{font-size:1.25rem; margin-bottom:12px}
 .recurso p{color:var(--tinta-suave); margin:0 0 20px}
+.recurso .btn{margin-top:auto}
 
 /* ---------- Bloques pendientes ---------- */
 .pendiente{border:1px dashed var(--azul-claro); border-radius:2px; padding:28px 26px;
