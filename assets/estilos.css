@@ -194,7 +194,7 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
    sin línea decorativa ni subrayado. line-height:1 en el propio <strong>
    para que no sume más aire encima del que ya da el line-height del h1. */
 .portada h1 strong{
-  font-weight:700; color:#2d7a4a; font-size:1.3em; line-height:1;
+  font-weight:700; color:#c41e3a; font-size:1.3em; line-height:1;
   transition:color .35s ease;
 }
 .portada .sub{max-width:56ch; margin-top:20px; font-size:clamp(1.02rem,1.6vw,1.28rem);
@@ -326,25 +326,26 @@ section.marino .sub-titulo{color:#bed0e4}
    rectas) sobre la foto del mural, para que el texto quede legible en
    marino en vez de blanco sobre foto. */
 .vm-col{
-  color:var(--marino); text-align:center;
-  background:rgba(255,255,255,.70); border-radius:0; padding:24px;
-  box-shadow:0 4px 16px rgba(0,0,0,.15);
-  transition:transform .3s ease;
+  color:#fff; text-align:center;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.24);
+  border-radius:2px; padding:30px 26px 32px;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
 }
-.vm-col:hover{transform:scale(1.03)}
+.vm-col:hover{transform:translateY(-4px); box-shadow:0 22px 44px -30px rgba(0,0,0,.5); border-color:#fff}
 .vm-col + .vm-col{margin-top:clamp(40px,6vw,64px)}
 /* Título con un símbolo a cada lado, los tres centrados verticalmente. */
 .titulo-vm{
   display:flex; align-items:center; justify-content:center; gap:16px;
-  font-family:var(--serif); text-transform:uppercase; color:var(--marino);
+  font-family:var(--serif); text-transform:uppercase; color:#fff;
   font-size:clamp(1.35rem,3.6vw,2.2rem);
-  margin:0 0 22px; font-weight:400; line-height:1.25;
+  margin:0 0 22px; font-weight:700; line-height:1.25;
 }
-.titulo-vm img{width:48px; height:48px; object-fit:contain; flex:0 0 auto}
+.titulo-vm img{width:48px; height:48px; object-fit:contain; flex:0 0 auto;
+  filter:brightness(0) invert(1)}
 .texto-vm{margin:0 auto; max-width:62ch; font-size:clamp(1.05rem,1.7vw,1.32rem);
-  line-height:1.62; color:var(--marino); text-align:justify; hyphens:auto}
+  line-height:1.62; color:#fff; text-align:justify; hyphens:auto}
 @media (min-width:1024px){
-  .vm-grid{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start}
+  .vm-grid{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:stretch}
   .vm-col + .vm-col{margin-top:0}
 }
 
@@ -405,6 +406,12 @@ section.marino .sub-titulo{color:#bed0e4}
   filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
   transition:transform .7s ease}
 .figura-capitulo:hover .caja img{transform:scale(1.04)}
+/* La foto de Spondylus trae mucho margen vacío alrededor de la pieza;
+   se recorta y baja un poco para que quede a la misma altura visual
+   que la Colección DALMAU, que sí llena su cuadro. */
+.caja-spondylus{overflow:hidden}
+.caja-spondylus img{transform:scale(1.22) translateY(6%)}
+.figura-capitulo:hover .caja-spondylus img{transform:scale(1.22) translateY(6%) scale(1.04)}
 /* Reserva el alto de hasta 2 líneas de pie de foto: como los dos pies
    tienen distinto largo, sin esto la foto con el pie más corto queda más
    abajo que la otra y se pierde la alineación. */
@@ -558,12 +565,14 @@ form textarea{min-height:140px; resize:vertical}
 }
 .paquete.destacado{border-color:var(--azul-claro);
   box-shadow:0 26px 50px -38px rgba(18,35,63,.55)}
+/* El número y el título del paquete van en la misma línea. */
+.paquete .cab-paquete{display:flex; align-items:center; gap:12px; margin:0 0 6px}
 .paquete .n{font-family:var(--num); font-size:1.6rem; color:#404040;
-  line-height:1; display:block}
+  line-height:1; display:block; flex:0 0 auto}
 /* Mismos números (imagen) que Objetivos estratégicos, a tamaño de
    insignia de tarjeta. */
-.paquete .n img{width:40px; height:auto}
-.paquete h3{font-size:1.2rem; margin:12px 0 6px; text-transform:uppercase;
+.paquete .n img{width:40px; height:auto; display:block}
+.paquete h3{font-size:1.2rem; margin:0; text-transform:uppercase;
   letter-spacing:.04em}
 .paquete .precio{font-family:var(--sans); font-size:.74rem; letter-spacing:.14em;
   text-transform:uppercase; color:var(--tinta-suave); font-weight:600; margin:0 0 18px}
@@ -592,7 +601,7 @@ form textarea{min-height:140px; resize:vertical}
 .recurso{display:flex; flex-direction:column}
 .recurso h3{font-size:1.25rem; margin-bottom:12px}
 .recurso p{color:var(--tinta-suave); margin:0 0 20px}
-.recurso .btn{margin-top:auto}
+.recurso .btn{margin-top:auto; width:100%; white-space:nowrap}
 
 /* ---------- Bloques pendientes ---------- */
 .pendiente{border:1px dashed var(--azul-claro); border-radius:2px; padding:28px 26px;
@@ -796,8 +805,11 @@ form textarea{min-height:140px; resize:vertical}
   }
   .nav-titulo::after{content:''; position:absolute; left:0; right:0; bottom:-3px;
     height:3px; background:var(--marino); transform:scaleX(0); transform-origin:center;
-    transition:transform .25s ease}
-  .nav-titulo.activo::after{transform:scaleX(1)}
+    transition:transform .35s ease}
+  .nav-titulo:hover::after,
+  .nav-titulo:focus-visible::after,
+  .nav-item.abierto-panel .nav-titulo::after,
+  .nav-item:focus-within .nav-titulo::after{transform:scaleX(1)}
   /* Panel: fondo blanco, sombra sutil, sin líneas divisoras entre las
      subsecciones. Lo abre menu.js (clase .abierto-panel) con 250ms de
      margen al salir, para que no se cierre al cruzar el espacio entre
