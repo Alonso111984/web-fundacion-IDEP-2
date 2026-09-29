@@ -351,7 +351,7 @@ section.marino .sub-titulo{color:#bed0e4}
 }
 .simbolo-vm{
   display:block; width:22px; height:22px; object-fit:contain;
-  filter:brightness(0) invert(1) sepia(1) hue-rotate(170deg) saturate(.85) brightness(1.1);
+  filter:brightness(0) invert(72%) sepia(1) hue-rotate(165deg) saturate(1.8) brightness(.88);
   margin:0 auto 18px;
 }
 @media (min-width:768px){
