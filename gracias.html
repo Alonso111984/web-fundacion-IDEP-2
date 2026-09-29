@@ -65,12 +65,43 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
   </div>
 </div>
 
-<!-- CORRECCIÓN 2 · logo de siglas. CORRECCIÓN 3 · botón de tres líneas, sin la palabra "Menú". -->
-<header class="cabecera compacta" id="cabecera">
+<header class="cabecera" id="cabecera">
   <div class="wrap">
     <a class="marca" href="index.html" aria-label="IDEP, inicio">
-      <img src="assets/img/logo-siglas-oscuro-recortado.png" width="720" height="351" alt="IDEP">
+      <img class="logo-claro" src="assets/img/logo-fondo-oscuro-web.png" width="720" height="351" alt="IDEP">
+      <img class="logo-oscuro" src="assets/img/logo-siglas-oscuro-recortado.png" width="720" height="351" alt="IDEP">
     </a>
+
+    <nav class="nav-desk" aria-label="Secciones del sitio">
+      <div class="nav-item">
+        <a class="nav-titulo" href="index.html#quienes">EL INSTITUTO</a>
+        <div class="nav-panel">
+          <a href="index.html#quienes"><span class="txt">¿Quiénes somos?</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#valores"><span class="txt">Valores &amp; objetivos</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#mision"><span class="txt">Visión &amp; misión</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#enlaces"><span class="txt">Sitios de interés</span><span class="ir">Ir a la página</span></a>
+          <a href="index.html#directorio"><span class="txt">Directorio</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-titulo" href="proyectos-investigacion.html#lineas">INVESTIGACIÓN</a>
+        <div class="nav-panel">
+          <a href="proyectos-investigacion.html#lineas"><span class="txt">Líneas de trabajo</span><span class="ir">Ir a la página</span></a>
+          <a href="proyectos-investigacion.html#sitios"><span class="txt">Sitios de intervención</span><span class="ir">Ir a la página</span></a>
+          <a href="proyectos-investigacion.html#divulgacion"><span class="txt">Investigación &amp; divulgación</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-titulo" href="autogestion-donativos.html#paquetes">FOMENTO</a>
+        <div class="nav-panel">
+          <a href="index.html#fomento"><span class="txt">Fondo de salvamento</span><span class="ir">Ir a la página</span></a>
+          <a href="autogestion-donativos.html#ensayo"><span class="txt">Ensayo SUR</span><span class="ir">Ir a la página</span></a>
+          <a href="autogestion-donativos.html#paquetes"><span class="txt">Paquetes de aporte</span><span class="ir">Ir a la página</span></a>
+        </div>
+      </div>
+      <a class="nav-titulo nav-directo" href="index.html#contacto">CONTACTO</a>
+    </nav>
+
     <button class="btn-menu" id="btnMenu" aria-expanded="false" aria-controls="panel" aria-label="Abrir menú">
       <span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
@@ -117,36 +148,34 @@ src="https://www.facebook.com/tr?id=1376010187844881&ev=PageView&noscript=1"></n
 </nav>
 <!--#/CHROME-SUPERIOR#-->
 
-<section>
+<section class="portada-int" style="background:#2f5c8f">
   <div class="wrap">
     <div class="gracias">
       <div class="sello" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#2f5c8f" stroke-width="1.4"
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.4"
              stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 6L9 17l-5-5"/>
         </svg>
       </div>
 
-      <p class="kicker">Aporte recibido</p>
-      <h1>Gracias por sumarse al Fondo de Salvamento y Memoria Andina</h1>
-      <p class="lead">Su aporte se destina a intervenir los sitios arqueológicos del programa
-      binacional Ecuador&ndash;Perú. Ya puede descargar la obra.</p>
+      <p class="kicker claro">Aporte recibido</p>
+      <h1 style="color:#fff">Gracias por sumarse al Fondo de Salvamento y Memoria Andina</h1>
+      <p class="lead" style="color:rgba(255,255,255,.82); margin-top:16px">Su aporte se destina a intervenir los sitios arqueológicos del programa binacional Ecuador&ndash;Perú. Ya puede descargar la obra.</p>
 
-      <div class="acciones" style="justify-content:center">
-        <a class="btn btn-azul" href="assets/docs/ensayo-sur.pdf" download>Descargar Ensayo SUR</a>
+      <div class="acciones" style="justify-content:center; margin-top:28px">
+        <a class="btn btn-solido" href="assets/docs/ensayo-sur.pdf" download>Descargar Ensayo SUR</a>
+        <a class="btn btn-linea" href="index.html">Volver al inicio</a>
       </div>
-      <p class="peso">PDF · 48 páginas · 12 MB</p>
+      <p class="peso" style="color:rgba(255,255,255,.6)">PDF · 48 páginas · 12 MB</p>
 
-      <div class="libre">
-        <p><strong>La obra es de libre circulación.</strong> Puede compartirla con quien quiera:
+      <div class="libre" style="background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25)">
+        <p style="color:rgba(255,255,255,.85)"><strong style="color:#fff">La obra es de libre circulación.</strong> Puede compartirla con quien quiera:
         mientras más lejos llegue, mejor cumple su propósito. Lo que su aporte sostiene es el
         trabajo de campo del instituto, no el acceso al documento.</p>
       </div>
 
-      <p class="ayuda">¿Tuvo algún inconveniente con la descarga? Escríbanos a
-        <a href="mailto:info@idepsur.org">info@idepsur.org</a>.</p>
-
-      <p class="volver"><a href="index.html">Volver al inicio</a></p>
+      <p class="ayuda" style="color:rgba(255,255,255,.65)">¿Tuvo algún inconveniente con la descarga? Escríbanos a
+        <a href="mailto:info@idepsur.org" style="color:#87ceeb">info@idepsur.org</a>.</p>
     </div>
   </div>
 </section>

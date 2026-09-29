@@ -195,7 +195,7 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
    para que no sume más aire encima del que ya da el line-height del h1. */
 .portada h1 strong{
   display:inline-block; white-space:nowrap;
-  font-weight:700; color:#ff9500; font-size:1.3em; line-height:1;
+  font-weight:700; color:inherit; font-size:1.3em; line-height:1;
 }
 .portada .sub{max-width:56ch; margin-top:20px; font-size:clamp(1.02rem,1.6vw,1.28rem);
   color:#dce7f3; font-style:italic; line-height:1.6}
@@ -344,13 +344,16 @@ section.marino .sub-titulo{color:#bed0e4}
 .vm-col + .vm-col{margin-top:clamp(40px,6vw,64px)}
 /* Título con un símbolo a cada lado, los tres centrados verticalmente. */
 .titulo-vm{
-  display:flex; align-items:center; justify-content:center; gap:16px;
+  display:block; text-align:center;
   font-family:var(--serif); text-transform:uppercase; color:#87ceeb;
   font-size:clamp(1.35rem,3.6vw,2.2rem);
-  margin:0 0 22px; font-weight:700; line-height:1.25;
+  margin:0 0 10px; font-weight:700; line-height:1.25;
 }
-.titulo-vm img{width:48px; height:48px; object-fit:contain; flex:0 0 auto;
-  filter:brightness(0) invert(1) sepia(1) hue-rotate(163deg) saturate(.7) brightness(1.1)}
+.simbolo-vm{
+  display:block; width:28px; height:28px; object-fit:contain;
+  filter:brightness(0) invert(1) sepia(1) hue-rotate(163deg) saturate(.7) brightness(1.1);
+  margin:0 auto 20px;
+}
 .texto-vm{margin:0 auto; max-width:62ch; font-size:clamp(1.05rem,1.7vw,1.32rem);
   line-height:1.62; color:#fff; text-align:justify; hyphens:auto}
 @media (min-width:1024px){
@@ -492,6 +495,20 @@ a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
   border-radius:2px; padding:30px 24px}
 .persona.sin-foto h3{margin:0 0 6px}
 .persona.sin-foto .cargo{margin:0}
+/* Variante: nombres en fila horizontal sin cuadros */
+.equipo-fila{
+  display:flex; flex-wrap:wrap; gap:20px 40px;
+  justify-content:center; align-items:flex-start; max-width:100%
+}
+.equipo-fila .persona.sin-foto{
+  background:none; border:none; border-radius:0; padding:0;
+  text-align:center; flex:0 0 auto;
+}
+.equipo-fila .persona.sin-foto h3{font-size:1.1rem; margin:0 0 4px}
+.equipo-fila .persona.sin-foto .cargo{
+  font-family:var(--sans); font-size:.73rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--tinta-suave); margin:0; line-height:1.5
+}
 
 /* ---------- CORRECCIÓN 21 · Contacto ---------- */
 .contacto-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(30px,5vw,64px)}
@@ -547,7 +564,7 @@ form textarea{min-height:140px; resize:vertical}
      El tope de la portada del libro deja sitio para el título y los rellenos. */
   .portada-donativos{min-height:calc(100dvh - 128px); display:flex; align-items:center;
     padding-top:clamp(20px,2.5vw,34px); padding-bottom:clamp(20px,2.5vw,34px)}
-  .portada-donativos .apoyar-grid{margin-top:clamp(14px,1.8vw,24px)}
+  .portada-donativos .apoyar-grid{margin-top:clamp(36px,4.5vw,56px)}
   /* El tope deja sitio para el título, la portada Y el texto de debajo,
      que es lo que hace falta para que la franja entre entera en pantalla. */
   .portada-donativos .apoyar-grid img{max-height:calc(100dvh - 476px);
@@ -609,7 +626,7 @@ form textarea{min-height:140px; resize:vertical}
    del documento (presentación → programa → YouTube). */
 .recursos-3{grid-template-columns:repeat(3,1fr)}
 .recurso{display:flex; flex-direction:column}
-.recurso-fondo{background:rgba(47,92,143,.05); padding:2rem; border-radius:6px}
+.recurso-fondo{background:rgba(47,92,143,.05); padding:2rem; border-radius:6px; text-align:center}
 .recurso h3{font-size:1.25rem; margin-bottom:12px}
 .recurso p{color:var(--tinta-suave); margin:0 0 20px}
 .recurso .btn{margin-top:auto; width:100%; white-space:nowrap}
@@ -746,7 +763,6 @@ form textarea{min-height:140px; resize:vertical}
 @media (max-width:767.98px){
   .caja-apoyo .btn,.recurso .btn{display:flex; margin-left:auto; margin-right:auto}
   .recursos{text-align:center}
-  .recurso p{text-align:left}
 }
 @media (max-width:560px){
   :root{--logo:40px; --cab:58px}
