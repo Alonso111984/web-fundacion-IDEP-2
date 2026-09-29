@@ -347,12 +347,15 @@ section.marino .sub-titulo{color:#bed0e4}
   display:block; text-align:center;
   font-family:var(--serif); text-transform:uppercase; color:#87ceeb;
   font-size:clamp(1.35rem,3.6vw,2.2rem);
-  margin:0 0 10px; font-weight:700; line-height:1.25;
+  margin:0 0 4px; font-weight:700; line-height:1.25;
 }
 .simbolo-vm{
-  display:block; width:28px; height:28px; object-fit:contain;
-  filter:brightness(0) invert(1) sepia(1) hue-rotate(163deg) saturate(.7) brightness(1.1);
-  margin:0 auto 20px;
+  display:block; width:22px; height:22px; object-fit:contain;
+  filter:brightness(0) invert(1) sepia(1) hue-rotate(170deg) saturate(.85) brightness(1.1);
+  margin:0 auto 18px;
+}
+@media (min-width:768px){
+  .simbolo-vm{width:28px; height:28px}
 }
 .texto-vm{margin:0 auto; max-width:62ch; font-size:clamp(1.05rem,1.7vw,1.32rem);
   line-height:1.62; color:#fff; text-align:justify; hyphens:auto}
@@ -495,10 +498,14 @@ a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
   border-radius:2px; padding:30px 24px}
 .persona.sin-foto h3{margin:0 0 6px}
 .persona.sin-foto .cargo{margin:0}
-/* Variante: nombres en fila horizontal sin cuadros */
+/* Variante: nombres en columna en escritorio, fila en celular */
 .equipo-fila{
   display:flex; flex-wrap:wrap; gap:20px 40px;
   justify-content:center; align-items:flex-start; max-width:100%
+}
+@media (min-width:768px){
+  .equipo-fila{flex-direction:column; flex-wrap:nowrap; align-items:center; gap:18px}
+  .br-mob{display:none}
 }
 .equipo-fila .persona.sin-foto{
   background:none; border:none; border-radius:0; padding:0;
@@ -559,12 +566,15 @@ form textarea{min-height:140px; resize:vertical}
   letter-spacing:.02em; margin-bottom:0}
 /* En computadora, toda la franja azul —rótulo, título y portada del libro—
    entra en la pantalla sin tener que desplazar. */
+@media (max-width:900px){
+  .portada-donativos .apoyar-grid{margin-top:clamp(28px,5vw,42px)}
+}
 @media (min-width:901px){
   /* 120 px es lo que ocupan juntas la barra azul superior y la cabecera.
      El tope de la portada del libro deja sitio para el título y los rellenos. */
   .portada-donativos{min-height:calc(100dvh - 128px); display:flex; align-items:center;
     padding-top:clamp(20px,2.5vw,34px); padding-bottom:clamp(20px,2.5vw,34px)}
-  .portada-donativos .apoyar-grid{margin-top:clamp(36px,4.5vw,56px)}
+  .portada-donativos .apoyar-grid{margin-top:clamp(8px,1.2vw,14px)}
   /* El tope deja sitio para el título, la portada Y el texto de debajo,
      que es lo que hace falta para que la franja entre entera en pantalla. */
   .portada-donativos .apoyar-grid img{max-height:calc(100dvh - 476px);
@@ -759,10 +769,15 @@ form textarea{min-height:140px; resize:vertical}
   .objetivos-zona .bloque:nth-of-type(2) .objetivos-txt{order:3}
   .objetivos-zona .bloque:nth-of-type(2) .pieza{order:4}
 }
-/* Botones centrados en celular */
+/* Botones y texto centrados en celular */
 @media (max-width:767.98px){
   .caja-apoyo .btn,.recurso .btn{display:flex; margin-left:auto; margin-right:auto}
   .recursos{text-align:center}
+  .caja-apoyo{text-align:center}
+  .simbolo-vm{width:18px; height:18px}
+  /* Colaboradores: 2 por fila en celular */
+  .equipo-fila{gap:16px 20px}
+  .equipo-fila .persona.sin-foto{flex:0 0 calc(50% - 10px); word-break:break-word}
 }
 @media (max-width:560px){
   :root{--logo:40px; --cab:58px}
