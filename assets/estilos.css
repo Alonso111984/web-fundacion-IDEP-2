@@ -195,7 +195,7 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
    para que no sume más aire encima del que ya da el line-height del h1. */
 .portada h1 strong{
   display:inline-block; white-space:nowrap;
-  font-weight:700; color:inherit; font-size:1.3em; line-height:1;
+  font-weight:700; color:inherit; font-size:1em; line-height:1;
 }
 .portada .sub{max-width:56ch; margin-top:20px; font-size:clamp(1.02rem,1.6vw,1.28rem);
   color:#dce7f3; font-style:italic; line-height:1.6}
@@ -352,7 +352,7 @@ section.marino .sub-titulo{color:#bed0e4}
 .simbolo-vm{
   display:block; width:22px; height:22px; object-fit:contain;
   filter:brightness(0) invert(72%) sepia(1) hue-rotate(165deg) saturate(1.8) brightness(.88);
-  margin:0 auto 18px;
+  margin:-4px auto 18px;
 }
 @media (min-width:768px){
   .simbolo-vm{width:28px; height:28px}
