@@ -345,7 +345,7 @@ section.marino .sub-titulo{color:#bed0e4}
 /* Título con un símbolo a cada lado, los tres centrados verticalmente. */
 .titulo-vm{
   display:block; text-align:center;
-  font-family:var(--serif); text-transform:uppercase; color:#87ceeb;
+  font-family:var(--serif); text-transform:uppercase; color:#fff;
   font-size:clamp(1.35rem,3.6vw,2.2rem);
   margin:0; font-weight:700; line-height:1.25;
 }
@@ -421,13 +421,8 @@ section.marino .sub-titulo{color:#bed0e4}
   filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
   transition:transform .7s ease}
 .figura-capitulo:hover .caja img{transform:scale(1.04)}
-/* La foto de Spondylus trae mucho margen vacío alrededor de la pieza;
-   se recorta y baja un poco para que quede a la misma altura visual
-   que la Colección DALMAU, que sí llena su cuadro. */
-.caja-spondylus{overflow:hidden}
-.caja-spondylus img{transform:scale(1.22) translateY(0)}
-.figura-capitulo:hover .caja-spondylus img{transform:scale(1.22) scale(1.04)}
-.caja-spondylus + figcaption{margin-top:-10px}
+.figura-capitulo:hover .caja-spondylus img{transform:scale(1.04)}
+@media (min-width:768px){.caja-spondylus img{max-width:72%; margin:0 auto}}
 /* Reserva el alto de hasta 2 líneas de pie de foto: como los dos pies
    tienen distinto largo, sin esto la foto con el pie más corto queda más
    abajo que la otra y se pierde la alineación. */
@@ -447,7 +442,7 @@ section.marino .sub-titulo{color:#bed0e4}
    Fondo con foto de las montañas y capa marino al 82%: texto en blanco. */
 #enlaces{
   position:relative; color:#fff;
-  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/montanas.webp');
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/img-fondo.jpg');
   background-size:cover; background-position:center;
 }
 #enlaces .kicker{color:var(--azul-claro)}
@@ -557,7 +552,7 @@ form textarea{min-height:140px; resize:vertical}
 .apoyar-grid figure:hover img{transform:scale(1.03)}
 .apoyar-grid .texto{max-width:72ch}
 .apoyar p{color:#c4d4e6; margin:0}
-.apoyar .texto p{text-align:justify; hyphens:auto}
+.apoyar .texto p{text-align:justify; hyphens:auto; font-size:.98rem; font-weight:400; max-width:50ch}
 .apoyar .kicker{margin-bottom:12px}
 .apoyar h2 + p{margin-top:18px}
 .portada-int + .apoyar{padding-top:clamp(26px,3vw,40px)}
@@ -607,9 +602,12 @@ form textarea{min-height:140px; resize:vertical}
   line-height:1; display:block; flex:0 0 auto}
 /* Mismos números (imagen) que Objetivos estratégicos, a tamaño de
    insignia de tarjeta. */
-.paquete .n img{width:40px; height:auto; display:block}
+.paquete .n img{width:28px; height:auto; display:block}
 .paquete h3{font-size:1rem; margin:0; text-transform:uppercase;
   letter-spacing:.04em; white-space:nowrap}
+.paquetes article:nth-child(1) h3{color:#D99B70}
+.paquetes article:nth-child(2) h3{color:#5C8C6E}
+.paquetes article:nth-child(3) h3{color:#7B5EA7}
 .paquete .precio{font-family:var(--sans); font-size:.74rem; letter-spacing:.14em;
   text-transform:uppercase; color:var(--tinta-suave); font-weight:600; margin:0 0 18px}
 .paquete .incluye{font-family:var(--sans); font-size:.72rem; letter-spacing:.1em;
@@ -679,7 +677,8 @@ form textarea{min-height:140px; resize:vertical}
 .pie li{margin-bottom:9px}
 .idea{font-family:var(--sans); font-size:.76rem; letter-spacing:.06em;
   color:#8fa9c6; margin:24px 0 10px}
-.logo-2{width:170px; opacity:.95}
+.logo-2{width:170px; opacity:.95; transition:opacity .3s ease}
+a:hover .logo-2{opacity:.6}
 .pie .legal{margin-top:clamp(34px,4vw,52px); padding-top:24px;
   border-top:1px solid rgba(255,255,255,.14);
   font-family:var(--sans); font-size:.76rem; color:#8299b6; display:flex;
@@ -851,7 +850,7 @@ form textarea{min-height:140px; resize:vertical}
   .nav-desk{display:flex; align-items:stretch; gap:clamp(18px,2.2vw,32px); height:100%}
   .nav-item{position:relative; display:flex; align-items:center}
   .nav-titulo{
-    font-family:var(--sans); font-size:.76rem; letter-spacing:.1em; font-weight:600;
+    font-family:var(--serif); font-size:.76rem; letter-spacing:.1em; font-weight:600;
     text-transform:uppercase; text-decoration:none; color:var(--cab-color);
     position:relative; padding:8px 1px; transition:color .35s ease;
   }
