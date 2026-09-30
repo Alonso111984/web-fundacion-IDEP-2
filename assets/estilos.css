@@ -478,7 +478,7 @@ a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
    --zoom ajusta cada foto por separado: la de Iliana es un recorte con fondo
    transparente cuya figura termina al 77 % del archivo, así que se amplía
    para que llegue al borde inferior y no quede flotando. */
-.persona .retrato{aspect-ratio:3/4; overflow:hidden; background:var(--celeste);
+.persona .retrato{aspect-ratio:3/4; overflow:hidden;
   border-radius:2px; position:relative}
 .persona .retrato img{width:100%; height:100%; object-fit:cover;
   object-position:top center; transform:scale(var(--zoom,1));
