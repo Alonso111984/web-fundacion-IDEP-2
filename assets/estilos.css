@@ -503,7 +503,7 @@ a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
   justify-content:center; align-items:flex-start; max-width:100%
 }
 @media (min-width:768px){
-  .equipo-fila{flex-direction:column; flex-wrap:nowrap; align-items:center; gap:18px}
+  .equipo-fila{flex-direction:column; flex-wrap:nowrap; align-items:center; gap:32px}
   .br-mob{display:none}
 }
 .equipo-fila .persona.sin-foto{
