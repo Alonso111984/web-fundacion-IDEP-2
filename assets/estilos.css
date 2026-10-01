@@ -597,7 +597,7 @@ form textarea{min-height:140px; resize:vertical}
 .paquete.destacado{border-color:var(--azul-claro);
   box-shadow:0 26px 50px -38px rgba(18,35,63,.55)}
 /* El número y el título del paquete van en la misma línea. */
-.paquete .cab-paquete{display:flex; align-items:center; gap:12px; margin:0 0 6px}
+.paquete .cab-paquete{display:flex; align-items:center; justify-content:center; gap:12px; margin:0 0 6px}
 .paquete .n{font-family:var(--num); font-size:1.6rem; color:#404040;
   line-height:1; display:block; flex:0 0 auto}
 /* Mismos números (imagen) que Objetivos estratégicos, a tamaño de
