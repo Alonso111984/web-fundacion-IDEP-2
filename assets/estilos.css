@@ -602,8 +602,8 @@ form textarea{min-height:140px; resize:vertical}
   line-height:1; display:block; flex:0 0 auto}
 /* Mismos números (imagen) que Objetivos estratégicos, a tamaño de
    insignia de tarjeta. */
-.paquete .n img{width:28px; height:auto; display:block}
-.paquete h3{font-size:1rem; margin:0; text-transform:uppercase;
+.paquete .n img{width:22px; height:auto; display:block}
+.paquete h3{font-size:1.18rem; margin:0; text-transform:uppercase;
   letter-spacing:.04em; white-space:nowrap}
 .paquetes article:nth-child(1) h3{color:#D99B70}
 .paquetes article:nth-child(2) h3{color:#5C8C6E}
