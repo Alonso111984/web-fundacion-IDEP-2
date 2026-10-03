@@ -339,7 +339,7 @@ section.marino .sub-titulo{color:#bed0e4}
   display:block; text-align:center;
   font-family:var(--serif); text-transform:uppercase; color:#fff;
   font-size:clamp(1.35rem,3.6vw,2.2rem);
-  margin:0; font-weight:700; line-height:1.25;
+  margin:0; font-weight:400; line-height:1.25;
 }
 .simbolo-vm{
   display:block; width:22px; height:22px; object-fit:contain;
@@ -835,16 +835,14 @@ a:hover .logo-2{opacity:.6}
      abajo), sin tener que perseguir el valor exacto de --cab de cada
      una (esos elementos no son descendientes de .cabecera y no ven su
      --cab local). */
-  .portada-int{padding-top:calc(clamp(40px,5.5vw,70px) + 44px)}
+  .portada-int{padding-top:calc(clamp(40px,5.5vw,70px) + 28px)}
   .apoyar.portada-donativos{padding-top:calc(clamp(20px,2.5vw,34px) + 110px)}
-  /* El conjunto logo + submenú + hamburguesa baja un poco más, separado
-     de la franja azul de apoyo. Misma altura en todas las páginas. */
-  :root{--cab:84px}
-  /* Al pasar a sólida, la franja blanca se compacta: el logo (58px) y el
-     botón de menú (46px) siguen entrando holgados. */
-  .cabecera.fija,
-  .cabecera.solida,
-  .cabecera:hover{--cab:68px}
+  /* Franja delgada y, sobre todo, de altura CONSTANTE en los tres
+     estados. Si el hover la encogiera, su borde inferior se alejaría del
+     cursor, el hover se cancelaría, volvería a crecer y quedaría otra vez
+     bajo el cursor: un bucle que reinicia sin parar el fundido entre los
+     dos logos y se ve como texto duplicado. Altura fija = sin bucle. */
+  :root{--cab:68px}
   /* El hero de index.html baja su contenido para no quedar pegado a la
      cabecera transparente flotante; el hero crece con el padding
      (flex+min-height, no se recorta). En celular queda igual. */
