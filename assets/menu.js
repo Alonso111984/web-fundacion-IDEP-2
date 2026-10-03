@@ -68,18 +68,22 @@
   }, 'menu');
 
   /* ---------- Cabecera al desplazar ----------
-     El umbral (44px) coincide con --barra-h en estilos.css: es lo que
-     mide la barra de apoyo en escritorio, así la cabecera pasa a sólida
-     justo cuando la barra ya se desplazó fuera de la pantalla. */
+     El umbral es el alto real de la barra de apoyo, medido en cada
+     comprobación: la barra ocupa una línea o dos según el ancho (60px u
+     103px), así que un número fijo dejaría la cabecera cambiando de color
+     antes o después de que la barra termine de salir de la pantalla. */
   seguro(function(){
     var cab = document.getElementById('cabecera');
     if(!cab){ return; }
+    var barra = document.querySelector('.barra-apoyo');
     var marcar = function(){
-      if(window.scrollY > 44){ cab.classList.add('fija'); }
+      var umbral = barra ? barra.offsetHeight : 44;
+      if(window.scrollY >= umbral){ cab.classList.add('fija'); }
       else { cab.classList.remove('fija'); }
     };
     marcar();
     window.addEventListener('scroll', marcar, {passive:true});
+    window.addEventListener('resize', marcar, {passive:true});
   }, 'cabecera');
 
   /* ---------- Submenú desplegable de escritorio ----------
