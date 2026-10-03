@@ -101,14 +101,6 @@ section.marino figcaption,.franja figcaption{color:#b9cbe1}
 .cabecera.fija{box-shadow:0 8px 26px -22px rgba(18,35,63,.55)}
 .cabecera .wrap{display:flex; align-items:center; justify-content:space-between;
   gap:20px; height:var(--cab)}
-/* Cabecera compacta y centrada: para autogestion-donativos.html,
-   proyectos-investigacion.html, gracias.html y privacidad.html
-   (index.html no lleva esta clase, se queda como está). Redefine --cab
-   solo dentro de la cabecera (no toca el resto del sitio, que sigue
-   usando los 62px de siempre para calcular scroll-padding, etc.), así
-   .wrap la hereda sin tocar su propia regla. */
-.cabecera.compacta{--cab:76px}
-.cabecera.compacta .marca img{margin-bottom:5px}
 /* El logo claro y el oscuro ocupan la misma celda (grid-area 1/1) y se
    cruzan con opacidad; cuál se ve depende de --cab-color (ver más abajo,
    punto 1 de la cabecera transparente, solo activo en escritorio). */
@@ -497,9 +489,13 @@ a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
   display:flex; flex-wrap:wrap; gap:20px 40px;
   justify-content:center; align-items:flex-start; max-width:100%
 }
+/* En celular las dos instituciones van en dos líneas y sin separador;
+   en escritorio van seguidas y el punto medio las separa. */
+.sep-desk{display:none}
 @media (min-width:768px){
   .equipo-fila{flex-direction:column; flex-wrap:nowrap; align-items:center; gap:32px}
   .br-mob{display:none}
+  .sep-desk{display:inline}
 }
 .equipo-fila .persona.sin-foto{
   background:none; border:none; border-radius:0; padding:0;
@@ -604,7 +600,7 @@ form textarea{min-height:140px; resize:vertical}
    insignia de tarjeta. */
 .paquete .n img{width:22px; height:auto; display:block}
 .paquete h3{font-size:1.18rem; margin:0; text-transform:uppercase;
-  letter-spacing:.04em; white-space:nowrap}
+  letter-spacing:.04em; text-align:center}
 .paquetes article:nth-child(1) h3{color:#D99B70}
 .paquetes article:nth-child(2) h3{color:#5C8C6E}
 .paquetes article:nth-child(3) h3{color:#7B5EA7}
@@ -687,26 +683,27 @@ a:hover .logo-2{opacity:.6}
   border-bottom:1px solid rgba(255,255,255,.22)}
 .pie .legal a:hover{color:#fff; border-bottom-color:rgba(255,255,255,.6)}
 
-/* ---------- Página de gracias ---------- */
+/* ---------- Página de gracias ----------
+   Portada de fondo claro: la cabecera lleva .solida en el HTML, porque
+   su variante transparente pinta los títulos en blanco. */
+.portada-int.portada-clara{background:var(--blanco); color:var(--tinta)}
+.portada-clara .kicker{color:var(--azul)}
+.portada-clara p{color:var(--tinta-suave)}
 .gracias{text-align:center; max-width:62ch; margin:0 auto}
-.gracias .sello{width:64px; height:64px; border:1px solid var(--azul-claro);
-  border-radius:50%; display:flex; align-items:center; justify-content:center;
-  margin:0 auto 26px}
+/* .portada-int limita h1 a 22ch y los párrafos a 60ch: sin margen
+   automático esas cajas quedan pegadas a la izquierda del bloque. */
+.gracias h1,.gracias p{margin-inline:auto}
+.gracias .sello{width:64px; height:64px; border:1px solid var(--azul);
+  color:var(--azul); border-radius:50%; display:flex; align-items:center;
+  justify-content:center; margin:0 auto 26px}
 .gracias .sello svg{width:30px; height:30px}
 .gracias .kicker{white-space:normal}
 .gracias h1{font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.18; margin-bottom:18px}
 .gracias .acciones{justify-content:center}
 .gracias .peso{font-family:var(--sans); font-size:.76rem; letter-spacing:.08em;
   color:var(--tinta-suave); margin-top:12px}
-.gracias .libre{background:var(--celeste-2); border:1px solid var(--linea);
-  border-radius:2px; padding:22px 24px; margin-top:32px; text-align:left}
-.gracias .libre p{margin:0; color:var(--tinta-suave); font-size:1rem}
 .gracias .ayuda{font-size:.95rem; color:var(--tinta-suave); margin-top:28px}
 .gracias .ayuda a{color:var(--azul)}
-.gracias .volver{margin-top:22px}
-.gracias .volver a{font-family:var(--sans); font-size:.75rem; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--azul); text-decoration:none;
-  border-bottom:1px solid var(--linea); padding-bottom:3px}
 
 /* ---------- Texto legal ---------- */
 .legal-texto{max-width:68ch}
@@ -807,23 +804,28 @@ a:hover .logo-2{opacity:.6}
     --cab-color:#fff;
     transition:background-color .35s ease,box-shadow .35s ease,top .35s ease,border-color .35s ease;
   }
-  /* Dos activaciones independientes para el estado sólido: pasar el
+  /* Tres activaciones independientes para el estado sólido: pasar el
      cursor sobre la franja (:hover, se revierte solo al quitar el
-     cursor) y el scroll (.fija, la pone menu.js). Cualquiera de las dos
+     cursor), el scroll (.fija, la pone menu.js) y .solida, fija en el
+     HTML de las páginas de fondo claro, donde el texto blanco de la
+     cabecera transparente sería invisible. Cualquiera de las tres
      alcanza para el fondo blanco, el logo oscuro y el texto marino. */
   .cabecera.fija,
+  .cabecera.solida,
   .cabecera:hover{
-    top:0; background:rgba(255,255,255,.97); backdrop-filter:saturate(160%) blur(9px);
+    background:rgba(255,255,255,.97); backdrop-filter:saturate(160%) blur(9px);
     box-shadow:0 2px 12px rgba(0,0,0,.08); --cab-color:var(--marino);
   }
-  /* Antes de hacer scroll, :hover por sí solo no debe fijar la cabecera
-     en la parte superior (top:0): solo el scroll (.fija) hace eso. */
-  .cabecera:hover:not(.fija){top:var(--barra-h)}
+  /* Solo el scroll sube la cabecera al borde superior: con el cursor
+     encima, o en .solida, sigue justo debajo de la barra de apoyo. */
+  .cabecera.fija{top:0}
   .marca .logo-claro{opacity:1}
   .marca .logo-oscuro{opacity:0}
   .cabecera.fija .marca .logo-claro,
+  .cabecera.solida .marca .logo-claro,
   .cabecera:hover .marca .logo-claro{opacity:0}
   .cabecera.fija .marca .logo-oscuro,
+  .cabecera.solida .marca .logo-oscuro,
   .cabecera:hover .marca .logo-oscuro{opacity:1}
   /* La cabecera ya no empuja el contenido (quedó "fija"/flotante):
      las portadas cortas de las páginas interiores dejan sitio arriba
@@ -833,14 +835,16 @@ a:hover .logo-2{opacity:.6}
      abajo), sin tener que perseguir el valor exacto de --cab de cada
      una (esos elementos no son descendientes de .cabecera y no ven su
      --cab local). */
-  .portada-int{padding-top:calc(clamp(40px,5.5vw,70px) + 110px)}
+  .portada-int{padding-top:calc(clamp(40px,5.5vw,70px) + 44px)}
   .apoyar.portada-donativos{padding-top:calc(clamp(20px,2.5vw,34px) + 110px)}
   /* El conjunto logo + submenú + hamburguesa baja un poco más, separado
-     de la franja azul de apoyo. En .compacta (autogestion-donativos,
-     proyectos-investigacion, gracias, privacidad) parte de una base ya
-     más alta, así que también sube más. */
+     de la franja azul de apoyo. Misma altura en todas las páginas. */
   :root{--cab:84px}
-  .cabecera.compacta{--cab:98px}
+  /* Al pasar a sólida, la franja blanca se compacta: el logo (58px) y el
+     botón de menú (46px) siguen entrando holgados. */
+  .cabecera.fija,
+  .cabecera.solida,
+  .cabecera:hover{--cab:68px}
   /* El hero de index.html baja su contenido para no quedar pegado a la
      cabecera transparente flotante; el hero crece con el padding
      (flex+min-height, no se recorta). En celular queda igual. */
